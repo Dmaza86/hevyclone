@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -61,13 +60,19 @@ fun Workouts() {
         bottomBar = {
             NavigationBar (containerColor = Color.DarkGray) {
                 NavigationBarItem(
-                    icon = { Icon(Icons.Outlined.Home, contentDescription = null, modifier = Modifier.size(30.dp)) },
+                    icon = {
+                        Icon(Icons.Outlined.Home,
+                            contentDescription = null,
+                            modifier = Modifier.size(30.dp)) },
                     label = { Text(text = "Home")},
                     selected = false,
                     onClick = {}
                 )
                 NavigationBarItem(
-                    icon = { Icon(painter = painterResource(id = R.drawable.dumbbell), contentDescription = null, modifier = Modifier.size(30.dp)) },
+                    icon = {
+                        Icon(painter = painterResource(id = R.drawable.dumbbell),
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)) },
                     label = { Text(text = "Workout") },
                     selected = true,
                     onClick = {}

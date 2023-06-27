@@ -3,6 +3,7 @@ package com.example.hevyclone.ui.ui.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -41,6 +42,7 @@ fun HevyButtons(
             icon(contentDescription, Modifier.size(30.dp), tint)
             Spacer(modifier = Modifier.width(8.dp))
             Text(
+                modifier = Modifier.padding(start = 8.dp),
                 text = text,
                 color = Color.White,
                 fontSize = 16.sp,

@@ -46,14 +46,13 @@ fun Workouts() {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "Workouts") },
+                title = { Text(text = "Workouts", style = MaterialTheme.typography.titleLarge) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.DarkGray),
                 navigationIcon = {
                     TextButton(onClick = {}) {
                         Text(
                             text = "PRO",
                             color = Color.Yellow,
-                            fontSize = 20.sp,
                             fontWeight = FontWeight.ExtraBold,
                             style = MaterialTheme.typography.titleLarge
                         )
@@ -119,7 +118,6 @@ fun Workouts() {
             Text(
                 text = "Quick Start",
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
                 style = MaterialTheme.typography.titleMedium
             )
             Spacer(modifier = Modifier.height(16.dp))

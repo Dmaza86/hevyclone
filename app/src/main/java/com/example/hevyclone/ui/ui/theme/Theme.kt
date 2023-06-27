@@ -1,4 +1,4 @@
-package com.example.hevyclone.ui.theme
+package com.example.hevyclone.ui.ui
 
 import android.app.Activity
 import android.os.Build

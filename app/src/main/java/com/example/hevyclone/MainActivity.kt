@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.hevyclone.screen.Workouts
-import com.example.hevyclone.ui.theme.HevyCloneTheme
+import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hevyclone.R
 import com.example.hevyclone.ui.ui.HevyCloneTheme
-import com.example.hevyclone.ui.ui.component.HevyButtons
+import com.example.hevyclone.ui.component.HevyButton
 
 @Composable
 fun Workouts() {
@@ -123,7 +123,7 @@ fun Workouts() {
             Spacer(modifier = Modifier.height(16.dp))
             Row()
             {
-                HevyButtons(
+                HevyButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Start Empty Workout",
                     icon = { contentDescription, modifier, tint ->
@@ -161,7 +161,7 @@ fun Workouts() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                HevyButtons(
+                HevyButton(
                     modifier = Modifier.weight(1f),
                     text = "New Routine",
                     icon = { contentDescription, modifier, tint ->
@@ -173,7 +173,7 @@ fun Workouts() {
                         )
                     },
                 )
-                HevyButtons(
+                HevyButton(
                     modifier = Modifier.weight(1f),
                     text = "Explore Routines",
                     icon = { contentDescription, modifier, tint ->

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Refresh
@@ -20,7 +21,6 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import com.example.hevyclone.R
 import com.example.hevyclone.ui.ui.HevyCloneTheme
 import com.example.hevyclone.ui.component.HevyButton
+import com.example.hevyclone.ui.component.HevyIconButton
 
 @Composable
 fun Workouts() {
@@ -59,12 +60,7 @@ fun Workouts() {
                     }
                 },
                 actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Filled.Refresh,
-                            contentDescription = null
-                        )
-                    }
+                    HevyIconButton(iconImageVector = Icons.Default.Refresh, tint = Color.Gray)
                 }
             )
         },
@@ -126,14 +122,7 @@ fun Workouts() {
                 HevyButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Start Empty Workout",
-                    icon = { contentDescription, modifier, tint ->
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = contentDescription,
-                            modifier = modifier,
-                            tint = tint
-                        )
-                    },
+                    iconImageVector = Icons.Default.Add
                 )
                 Spacer(modifier = Modifier.height(60.dp))
             }
@@ -149,12 +138,7 @@ fun Workouts() {
                     fontSize = 18.sp,
                     style = MaterialTheme.typography.titleMedium
                 )
-                Icon(
-                    painter = painterResource(id = R.drawable.new_folder),
-                    contentDescription = null,
-                    modifier = Modifier.size(30.dp),
-                    tint = Color.Cyan
-                )
+            HevyIconButton(iconDrawableId = R.drawable.new_folder)
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(
@@ -164,26 +148,13 @@ fun Workouts() {
                 HevyButton(
                     modifier = Modifier.weight(1f),
                     text = "New Routine",
-                    icon = { contentDescription, modifier, tint ->
-                        Icon(
-                            painter = painterResource(id = R.drawable.clipboard),
-                            contentDescription = contentDescription,
-                            modifier = modifier,
-                            tint = tint
-                        )
-                    },
+                    iconDrawableId = R.drawable.clipboard
                 )
+                Spacer(modifier = Modifier.width(8.dp))
                 HevyButton(
                     modifier = Modifier.weight(1f),
                     text = "Explore Routines",
-                    icon = { contentDescription, modifier, tint ->
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = contentDescription,
-                            modifier = modifier,
-                            tint = tint
-                        )
-                    }
+                    iconImageVector = Icons.Default.Search
                 )
             }
         }

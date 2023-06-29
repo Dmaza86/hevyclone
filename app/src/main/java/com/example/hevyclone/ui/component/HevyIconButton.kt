@@ -9,16 +9,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.hevyclone.R
+import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 @Composable
 fun HevyIconButton(
     iconImageVector: ImageVector? = null,
     @DrawableRes iconDrawableId: Int? = null,
-    onclick: () -> Unit = {},
+    onClick: () -> Unit = {},
     tint: Color = Color.Cyan
 ) {
-    IconButton(onClick = onclick) {
+    IconButton(onClick = onClick) {
         if (iconImageVector != null) {
             Icon(
                 imageVector = iconImageVector,
@@ -36,3 +39,15 @@ fun HevyIconButton(
         }
     }
 }
+
+@Preview
+@Composable
+fun HevyIconButtonPreview() {
+    HevyCloneTheme (darkTheme = true, dynamicColor = false) {
+        HevySecondaryButton(
+        text = "New Routine",
+        iconDrawableId = R.drawable.clipboard
+        )
+    }
+}
+

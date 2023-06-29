@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -19,29 +21,29 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 @Composable
-fun HevyButton(
+fun HevySecondaryButton(
     modifier: Modifier = Modifier,
     text: String,
     iconImageVector: ImageVector? = null,
     @DrawableRes iconDrawableId: Int? = null,
-    onclick: () -> Unit = {}
+    onClick: () -> Unit = {}
 ) {
     Button(
         modifier = modifier,
-        onClick = onclick,
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray),
         shape = RectangleShape
-    )
-    {
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
-        )
-        {
+        ) {
             if (iconImageVector != null) {
                 Icon(
                     imageVector = iconImageVector,
@@ -67,5 +69,15 @@ fun HevyButton(
                 style = MaterialTheme.typography.labelLarge
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun HevySecondaryButtonPreview() {
+    HevyCloneTheme (darkTheme = true, dynamicColor = false) {
+        HevySecondaryButton(
+            text = "Button", iconImageVector = Icons.Default.Favorite
+        )
     }
 }

@@ -2,7 +2,6 @@
 
 package com.example.hevyclone.screen
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,10 +35,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.hevyclone.R
+import com.example.hevyclone.ui.component.HeavyTitleMedium
 import com.example.hevyclone.ui.ui.HevyCloneTheme
-import com.example.hevyclone.ui.component.HevyButton
+import com.example.hevyclone.ui.component.HevySecondaryButton
 import com.example.hevyclone.ui.component.HevyIconButton
 
 @Composable
@@ -47,7 +46,7 @@ fun Workouts() {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "Workouts", style = MaterialTheme.typography.titleLarge) },
+                title = { Text(text = "Workout", style = MaterialTheme.typography.titleLarge) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.DarkGray),
                 navigationIcon = {
                     TextButton(onClick = {}) {
@@ -60,7 +59,7 @@ fun Workouts() {
                     }
                 },
                 actions = {
-                    HevyIconButton(iconImageVector = Icons.Default.Refresh, tint = Color.Gray)
+                    HevyIconButton(iconImageVector = Icons.Default.Refresh)
                 }
             )
         },
@@ -111,15 +110,13 @@ fun Workouts() {
                 .padding(contentPadding)
                 .padding(horizontal = 16.dp, vertical = 16.dp)
         ) {
-            Text(
-                text = "Quick Start",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row() {
+                HeavyTitleMedium(text = "Quick Start")
+            }
             Spacer(modifier = Modifier.height(16.dp))
             Row()
             {
-                HevyButton(
+                HevySecondaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Start Empty Workout",
                     iconImageVector = Icons.Default.Add
@@ -132,28 +129,24 @@ fun Workouts() {
                 horizontalArrangement = Arrangement.SpaceBetween
             )
             {
-                Text(
-                    text = "Routines",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    style = MaterialTheme.typography.titleMedium
-                )
-            HevyIconButton(iconDrawableId = R.drawable.new_folder)
+                HeavyTitleMedium(text = "Routines")
+
+                HevyIconButton(iconDrawableId = R.drawable.new_folder)
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                HevyButton(
+                HevySecondaryButton(
                     modifier = Modifier.weight(1f),
                     text = "New Routine",
                     iconDrawableId = R.drawable.clipboard
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                HevyButton(
+                HevySecondaryButton(
                     modifier = Modifier.weight(1f),
-                    text = "Explore Routines",
+                    text = "Explore",
                     iconImageVector = Icons.Default.Search
                 )
             }
@@ -161,12 +154,10 @@ fun Workouts() {
     }
 }
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
-)
+@Preview
 @Composable
 fun WorkoutsPreview() {
-    HevyCloneTheme {
+    HevyCloneTheme (darkTheme = true) {
         Workouts()
     }
 }

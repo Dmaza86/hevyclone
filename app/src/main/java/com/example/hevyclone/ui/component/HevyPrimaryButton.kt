@@ -28,7 +28,7 @@ fun HevyPrimaryButton (buttonLabel:String) {
                 .fillMaxWidth()
                 .padding(vertical = 10.dp),
             onClick = {},
-            shape = RoundedCornerShape(8.dp ),
+            shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(Color.Cyan)
         ) {
             Text(

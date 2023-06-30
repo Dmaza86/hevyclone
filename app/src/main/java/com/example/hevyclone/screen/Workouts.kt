@@ -148,12 +148,10 @@ fun Workouts() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 HevyIconTitleButton(
-                    modifier = Modifier.weight(1f),
                     text = "Phase 2:",
                     iconImageVector = Icons.Default.ArrowDropDown)
 
                 HevyIconButton(
-                    modifier = Modifier.weight(0f),
                     iconDrawableId = R.drawable.more_horizontal
                 )
             }

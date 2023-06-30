@@ -131,13 +131,11 @@ fun Workouts() {
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 HevySecondaryButton(
-                    modifier = Modifier.weight(1f),
                     text = "New Routine",
                     iconDrawableId = R.drawable.clipboard
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 HevySecondaryButton(
-                    modifier = Modifier.weight(1f),
                     text = "Explore",
                     iconImageVector = Icons.Default.Search
                 )

@@ -44,7 +44,6 @@ fun HevyIconTitleButton(
                         imageVector = iconImageVector,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onBackground
-
                     )
                 } else if (iconDrawableId != null) {
                     Icon(
@@ -59,7 +58,6 @@ fun HevyIconTitleButton(
                     text = text,
                     style = MaterialTheme.typography.titleSmall
                 )
-
         }
     }
 }

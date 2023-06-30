@@ -16,6 +16,7 @@ import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 @Composable
 fun HevyIconButton(
+    modifier: Modifier = Modifier,
     iconImageVector: ImageVector? = null,
     @DrawableRes iconDrawableId: Int? = null,
     onClick: () -> Unit = {},
@@ -24,16 +25,16 @@ fun HevyIconButton(
     IconButton(onClick = onClick) {
         if (iconImageVector != null) {
             Icon(
+                modifier = modifier then Modifier.size(30.dp),
                 imageVector = iconImageVector,
                 contentDescription = null,
-                modifier = Modifier.size(30.dp),
                 tint = tint
             )
         } else if (iconDrawableId != null) {
             Icon(
+                modifier = modifier then Modifier.size(30.dp),
                 painter = painterResource(id = iconDrawableId),
                 contentDescription = null,
-                modifier = Modifier.size(30.dp),
                 tint = tint
             )
         }

@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -41,21 +42,22 @@ fun HevySecondaryButton(
         shape = RectangleShape
     ) {
         Row(
+            Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
             if (iconImageVector != null) {
                 Icon(
+                    modifier = Modifier.size(30.dp),
                     imageVector = iconImageVector,
                     contentDescription = null,
-                    modifier = Modifier.size(30.dp),
                     tint = Color.Cyan
                 )
             } else if (iconDrawableId != null) {
                 Icon(
+                    modifier = Modifier.size(30.dp),
                     painter = painterResource(id = iconDrawableId),
                     contentDescription = null,
-                    modifier = Modifier.size(30.dp),
                     tint = Color.Cyan
                 )
             }
@@ -77,7 +79,7 @@ fun HevySecondaryButton(
 fun HevySecondaryButtonPreview() {
     HevyCloneTheme (darkTheme = true, dynamicColor = false) {
         HevySecondaryButton(
-            text = "Button", iconImageVector = Icons.Default.Favorite
+            text = "New Routine", iconImageVector = Icons.Default.Favorite
         )
     }
 }

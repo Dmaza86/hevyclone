@@ -24,7 +24,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 @Composable
@@ -65,7 +64,6 @@ fun HevySecondaryButton(
             Text(
                 text = text,
                 color = Color.White,
-                fontSize = 16.sp,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = MaterialTheme.typography.labelLarge

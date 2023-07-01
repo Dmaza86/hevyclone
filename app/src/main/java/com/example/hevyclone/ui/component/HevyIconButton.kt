@@ -45,10 +45,7 @@ fun HevyIconButton(
 @Composable
 fun HevyIconButtonPreview() {
     HevyCloneTheme (darkTheme = true, dynamicColor = false) {
-        HevySecondaryButton(
-        text = "New Routine",
-        iconDrawableId = R.drawable.clipboard
-        )
+        HevyIconButton(iconDrawableId = R.drawable.clipboard)
     }
 }
 

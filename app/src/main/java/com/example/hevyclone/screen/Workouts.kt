@@ -109,14 +109,14 @@ fun Workouts() {
             Row {
                 HeavyTitleMedium(text = "Quick Start")
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Row {
                 HevySecondaryButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Start Empty Workout",
                     iconImageVector = Icons.Default.Add
                 )
-                Spacer(modifier = Modifier.height(60.dp))
+                Spacer(modifier = Modifier.height(8.dp))
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -126,16 +126,18 @@ fun Workouts() {
                 HeavyTitleMedium(text = "Routines")
                 HevyIconButton(iconDrawableId = R.drawable.new_folder)
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 HevySecondaryButton(
+                    modifier = Modifier.weight(1f),
                     text = "New Routine",
                     iconDrawableId = R.drawable.clipboard
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 HevySecondaryButton(
+                    modifier = Modifier.weight(1f),
                     text = "Explore",
                     iconImageVector = Icons.Default.Search
                 )

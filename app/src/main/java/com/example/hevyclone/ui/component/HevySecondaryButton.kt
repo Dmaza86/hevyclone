@@ -32,7 +32,8 @@ fun HevySecondaryButton(
     text: String,
     iconImageVector: ImageVector? = null,
     @DrawableRes iconDrawableId: Int? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    color: Color = Color.White,
 ) {
     Button(
         modifier = modifier,
@@ -63,7 +64,7 @@ fun HevySecondaryButton(
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = text,
-                color = Color.White,
+                color = color,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = MaterialTheme.typography.labelLarge
@@ -75,7 +76,7 @@ fun HevySecondaryButton(
 @Preview
 @Composable
 fun HevySecondaryButtonPreview() {
-    HevyCloneTheme (darkTheme = true, dynamicColor = false) {
+    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
         HevySecondaryButton(
             text = "New Routine", iconImageVector = Icons.Default.Favorite
         )

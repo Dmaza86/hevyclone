@@ -1,12 +1,13 @@
 package com.example.hevyclone
 
+import StartEmptyWorkoutPreview
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.hevyclone.screen.Workouts
+import com.example.hevyclone.screen.Workout
 import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HevyCloneTheme {
-               Workouts()
+               StartEmptyWorkoutPreview()
             }
         }
     }
@@ -25,6 +26,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WorkoutsPreview() {
     HevyCloneTheme {
-        Workouts()
+        Workout()
     }
 }

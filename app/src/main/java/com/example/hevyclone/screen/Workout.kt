@@ -47,65 +47,66 @@ import com.example.hevyclone.ui.component.HevySecondaryButton
 import com.example.hevyclone.ui.component.HevyIconButton
 
 @Composable
-fun Workouts() {
-    Scaffold(topBar = {
-        CenterAlignedTopAppBar(title = {
-            Text(
-                text = "Workout",
-                style = MaterialTheme.typography.titleLarge
-            )
-        },
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.DarkGray),
-            navigationIcon = {
-                TextButton(onClick = {}) {
-                    Text(
-                        text = "PRO",
-                        color = Color.Yellow,
-                        fontWeight = FontWeight.ExtraBold,
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                }
-            },
-            actions = {
-                HevyIconButton(
-                    modifier = Modifier.padding(end = 8.dp),
-                    iconImageVector = Icons.Default.Refresh
+fun Workout() {
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(title = {
+                Text(
+                    text = "Workout",
+                    style = MaterialTheme.typography.titleLarge
                 )
-            })
-    }, bottomBar = {
-        NavigationBar(containerColor = Color.DarkGray) {
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        Icons.Outlined.Home,
-                        modifier = Modifier.size(30.dp),
-                        contentDescription = null,
+            },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.DarkGray),
+                navigationIcon = {
+                    TextButton(onClick = {}) {
+                        Text(
+                            text = "PRO",
+                            color = Color.Yellow,
+                            fontWeight = FontWeight.ExtraBold,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
+                },
+                actions = {
+                    HevyIconButton(
+                        modifier = Modifier.padding(end = 8.dp),
+                        iconImageVector = Icons.Default.Refresh
                     )
-                }, label = { Text(text = "Home") },
-                selected = false,
-                onClick = {})
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        modifier = Modifier.size(30.dp),
-                        painter = painterResource(id = R.drawable.dumbbell),
-                        contentDescription = null,
-                    )
-                }, label = { Text(text = "Workout") },
-                selected = true,
-                onClick = {})
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        Icons.Outlined.Person,
-                        contentDescription = null,
-                        modifier = Modifier.size(30.dp)
-                    )
-                }, label = { Text(text = "Profile") },
-                selected = false,
-                onClick = {})
-        }
-    }) { contentPadding ->
+                })
+        }, bottomBar = {
+            NavigationBar(containerColor = Color.DarkGray) {
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            Icons.Outlined.Home,
+                            modifier = Modifier.size(30.dp),
+                            contentDescription = null,
+                        )
+                    }, label = { Text(text = "Home") },
+                    selected = false,
+                    onClick = {})
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            modifier = Modifier.size(30.dp),
+                            painter = painterResource(id = R.drawable.dumbbell),
+                            contentDescription = null,
+                        )
+                    }, label = { Text(text = "Workout") },
+                    selected = true,
+                    onClick = {})
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            Icons.Outlined.Person,
+                            contentDescription = null,
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }, label = { Text(text = "Profile") },
+                    selected = false,
+                    onClick = {})
+            }
+        }) { contentPadding ->
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -182,6 +183,6 @@ fun Workouts() {
 @Composable
 fun WorkoutsPreview() {
     HevyCloneTheme(darkTheme = true) {
-        Workouts()
+        Workout()
     }
 }

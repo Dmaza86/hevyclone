@@ -58,7 +58,7 @@ fun HevyCard(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2,
             )
-            HevyPrimaryButton(buttonLabel = buttonLabel)
+            HevyPrimaryButton(modifier = Modifier.fillMaxWidth(), buttonLabel = buttonLabel)
         }
     }
 }

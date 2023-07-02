@@ -74,29 +74,36 @@ fun Workouts() {
             })
     }, bottomBar = {
         NavigationBar(containerColor = Color.DarkGray) {
-
-            NavigationBarItem(icon = {
-                Icon(
-                    Icons.Outlined.Home,
-                    modifier = Modifier.size(30.dp),
-                    contentDescription = null,
-                )
-            }, label = { Text(text = "Home") }, selected = false, onClick = {})
-
-            NavigationBarItem(icon = {
-                Icon(
-                    modifier = Modifier.size(30.dp),
-                    painter = painterResource(id = R.drawable.dumbbell),
-                    contentDescription = null,
-                )
-            }, label = { Text(text = "Workout") }, selected = true, onClick = {})
-            NavigationBarItem(icon = {
-                Icon(
-                    Icons.Outlined.Person,
-                    contentDescription = null,
-                    modifier = Modifier.size(30.dp)
-                )
-            }, label = { Text(text = "Profile") }, selected = false, onClick = {})
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        Icons.Outlined.Home,
+                        modifier = Modifier.size(30.dp),
+                        contentDescription = null,
+                    )
+                }, label = { Text(text = "Home") },
+                selected = false,
+                onClick = {})
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        modifier = Modifier.size(30.dp),
+                        painter = painterResource(id = R.drawable.dumbbell),
+                        contentDescription = null,
+                    )
+                }, label = { Text(text = "Workout") },
+                selected = true,
+                onClick = {})
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        Icons.Outlined.Person,
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
+                    )
+                }, label = { Text(text = "Profile") },
+                selected = false,
+                onClick = {})
         }
     }) { contentPadding ->
         Column(
@@ -149,8 +156,8 @@ fun Workouts() {
             ) {
                 HevyIconTitleButton(
                     text = "Phase 2:",
-                    iconImageVector = Icons.Default.ArrowDropDown)
-
+                    iconImageVector = Icons.Default.ArrowDropDown
+                )
                 HevyIconButton(
                     iconDrawableId = R.drawable.more_horizontal
                 )

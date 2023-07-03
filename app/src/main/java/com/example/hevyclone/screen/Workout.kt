@@ -42,9 +42,9 @@ import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
 import com.example.hevyclone.ui.component.HeavyTitleMedium
 import com.example.hevyclone.ui.component.HevyIconTitleButton
-import com.example.hevyclone.ui.component.HevyCard
+import com.example.hevyclone.ui.component.HevyRoutinesCard
 import com.example.hevyclone.ui.ui.HevyCloneTheme
-import com.example.hevyclone.ui.component.HevySecondaryButton
+import com.example.hevyclone.ui.component.HevySecondaryIconButton
 import com.example.hevyclone.ui.component.HevyIconButton
 
 @Composable
@@ -88,7 +88,7 @@ fun Workout() {
                     selected = false,
                     onClick = {})
                 NavigationBarItem(
-                    colors = NavigationBarItemDefaults.colors(Color.Cyan, indicatorColor = Color.DarkGray),
+                    colors = NavigationBarItemDefaults.colors(Color.Cyan, indicatorColor = Color.DarkGray, selectedTextColor = Color.Cyan),
                     icon = {
                         Icon(
                             modifier = Modifier.size(30.dp),
@@ -96,7 +96,7 @@ fun Workout() {
                             contentDescription = null
                         )
                     },
-                    label = { Text(text = "Workout", color = Color.Cyan) },
+                    label = { Text(text = "Workout") },
                     selected = true,
                     onClick = {})
                 NavigationBarItem(
@@ -124,7 +124,7 @@ fun Workout() {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Row {
-                HevySecondaryButton(
+                HevySecondaryIconButton(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Start Empty Workout",
                     iconImageVector = Icons.Default.Add
@@ -143,13 +143,13 @@ fun Workout() {
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                HevySecondaryButton(
+                HevySecondaryIconButton(
                     modifier = Modifier.weight(1f),
                     text = "New Routine",
                     iconDrawableId = R.drawable.clipboard
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                HevySecondaryButton(
+                HevySecondaryIconButton(
                     modifier = Modifier.weight(1f),
                     text = "Explore",
                     iconImageVector = Icons.Default.Search
@@ -168,16 +168,16 @@ fun Workout() {
                     iconDrawableId = R.drawable.more_horizontal
                 )
             }
-            Column {
-                HevyCard(
+            Column() {
+                HevyRoutinesCard(
                     title = "Push #1",
                     text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",
-                    buttonLabel = "Start Routine"
+                    label = "Start Routine"
                 )
-                HevyCard(
+                HevyRoutinesCard(
                     title = "Legs #1",
                     text = "Squat, Deadlift, Leg Extension, Seated Calf Raise Cable.",
-                    buttonLabel = "Start Routine"
+                    label = "Start Routine"
                 )
             }
         }

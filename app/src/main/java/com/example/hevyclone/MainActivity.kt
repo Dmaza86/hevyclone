@@ -1,6 +1,6 @@
 package com.example.hevyclone
 
-import StartEmptyWorkoutPreview
+import StartEmptyWorkout
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HevyCloneTheme {
-               Workout()
+               StartEmptyWorkout()
             }
         }
     }

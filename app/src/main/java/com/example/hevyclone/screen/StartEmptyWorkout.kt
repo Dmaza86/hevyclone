@@ -59,23 +59,20 @@ fun StartEmptyWorkout() {
                         .padding(end = 8.dp),
                     iconDrawableId = R.drawable.timer
                 )
-                HevyPrimaryButton(
-                    modifier = Modifier.padding(end = 8.dp),
-                    buttonLabel = "Finish",
-                    buttonWidth = 100.dp
-                )
+                HevyPrimaryButton(label = "Finish")
             })
     }) { contentPadding ->
-        Divider(color = Color.LightGray, thickness = 70.dp)
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .fillMaxWidth()
                 .padding(contentPadding)
-                .padding(horizontal = 16.dp, vertical = 16.dp)
         ) {
+            Divider(color = Color.LightGray, thickness = 4.dp)
             Row(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             )
             {
@@ -83,61 +80,60 @@ fun StartEmptyWorkout() {
                 HevyDoubleTextButton(title = "Volume", content = "0 lbs")
                 HevyDoubleTextButton(title = "Sets", content = "0")
             }
-            Divider(color = Color.LightGray, thickness = 2.dp)
-            Spacer(modifier = Modifier.height(30.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            )
-            {
-                Icon(
-                    painter = painterResource(id = R.drawable.dumbbell_horizontal),
-                    tint = Color.White,
-                    contentDescription = null,
-                    modifier = Modifier.size(30.dp)
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                HeavyTitleMedium(text = "Get started")
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(text = "Add an exercise to start your workout")
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                HevyPrimaryButton(
+            Divider(color = Color.LightGray, thickness = 1.dp)
+
+            Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)) {
+                Row(
                     modifier = Modifier.fillMaxWidth(),
-                    buttonLabel = "+ Add Exercise"
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                HevySecondaryButton(
-                    modifier = Modifier.weight(1f),
-                    text = "Settings"
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                HevySecondaryButton(
-                    modifier = Modifier.weight(1f),
-                    text = "Discard Workout",
-                    color = Color.Red
-                )
+                {
+                    Icon(
+                        painter = painterResource(id = R.drawable.dumbbell_horizontal),
+                        tint = Color.White,
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    HeavyTitleMedium(text = "Get started")
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "Add an exercise to start your workout")
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    HevyPrimaryButton(label = "+ Add Exercise", modifier = Modifier.fillMaxWidth())
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row()
+                {
+                    HevySecondaryButton(
+                        modifier = Modifier.weight(1f),
+                        text = "Settings"
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    HevySecondaryButton(
+                        modifier = Modifier.weight(1f),
+                        text = "Discard Workout",
+                        color = Color.Red
+                    )
+                }
             }
         }
     }

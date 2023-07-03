@@ -22,10 +22,10 @@ import com.example.hevyclone.R
 import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 @Composable
-fun HevyCard(
+fun HevyRoutinesCard(
     title: String,
     text: String,
-    buttonLabel: String
+    label: String
 ) {
     Card(
         modifier = Modifier
@@ -58,7 +58,7 @@ fun HevyCard(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2,
             )
-            HevyPrimaryButton(modifier = Modifier.fillMaxWidth(), buttonLabel = buttonLabel)
+            HevyPrimaryButton(label = label, modifier = Modifier.fillMaxWidth())
         }
     }
 }
@@ -67,15 +67,15 @@ fun HevyCard(
 @Composable
 fun HevyCardPreview() {
     HevyCloneTheme(darkTheme = true, dynamicColor = false) {
-        HevyCard(
+        HevyRoutinesCard(
             title = "Push #1",
             text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",
-            buttonLabel = "Start Routine"
+            label = "Start Routine"
         )
-        HevyCard(
+        HevyRoutinesCard(
             title = "Push #1",
             text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",
-            buttonLabel = "Start Routine"
+            label = "Start Routine"
         )
     }
 }

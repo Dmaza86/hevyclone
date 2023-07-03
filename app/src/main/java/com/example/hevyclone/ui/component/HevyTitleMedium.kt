@@ -14,12 +14,10 @@ fun HeavyTitleMedium(
     modifier:Modifier = Modifier,
     text: String,
     fontWeight: FontWeight = FontWeight.Bold,
-    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         modifier = modifier,
         text = text,
-        color = color,
         fontWeight = fontWeight,
         style = MaterialTheme.typography.titleMedium
     )

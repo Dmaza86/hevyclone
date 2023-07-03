@@ -104,7 +104,7 @@ fun StartEmptyWorkout() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                HeavyTitleMedium(text = "Get started", color = Color.White)
+                HeavyTitleMedium(text = "Get started")
             }
             Spacer(modifier = Modifier.height(8.dp))
             Row(
@@ -112,7 +112,7 @@ fun StartEmptyWorkout() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = "Add an exercise to Start your workout")
+                Text(text = "Add an exercise to start your workout")
             }
             Spacer(modifier = Modifier.height(8.dp))
             Row(

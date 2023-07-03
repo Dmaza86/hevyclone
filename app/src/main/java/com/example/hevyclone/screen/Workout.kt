@@ -26,6 +26,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -82,17 +83,20 @@ fun Workout() {
                             modifier = Modifier.size(30.dp),
                             contentDescription = null,
                         )
-                    }, label = { Text(text = "Home") },
+                    },
+                    label = { Text(text = "Home") },
                     selected = false,
                     onClick = {})
                 NavigationBarItem(
+                    colors = NavigationBarItemDefaults.colors(Color.Cyan, indicatorColor = Color.DarkGray),
                     icon = {
                         Icon(
                             modifier = Modifier.size(30.dp),
                             painter = painterResource(id = R.drawable.dumbbell),
-                            contentDescription = null,
+                            contentDescription = null
                         )
-                    }, label = { Text(text = "Workout") },
+                    },
+                    label = { Text(text = "Workout", color = Color.Cyan) },
                     selected = true,
                     onClick = {})
                 NavigationBarItem(
@@ -102,7 +106,8 @@ fun Workout() {
                             contentDescription = null,
                             modifier = Modifier.size(30.dp)
                         )
-                    }, label = { Text(text = "Profile") },
+                    },
+                    label = { Text(text = "Profile") },
                     selected = false,
                     onClick = {})
             }

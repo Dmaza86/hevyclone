@@ -1,5 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,21 +12,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -113,6 +125,144 @@ fun StartEmptyWorkout() {
                     Text(text = "Add an exercise to start your workout")
                 }
                 Spacer(modifier = Modifier.height(8.dp))
+
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.background
+                    )
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    )
+                    {
+                        TextButton(
+                            onClick = {},
+                            colors = ButtonDefaults.buttonColors(
+                                contentColor = Color.Cyan,
+                                containerColor = Color.Transparent
+                            )
+                        ) {
+                            Icon(
+                                painterResource(id = R.drawable.clipboard),
+                                contentDescription = null,
+
+                                )
+                            Text(
+                                text = "Ab Scissors",
+                                modifier = Modifier.padding(start = 8.dp),
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                        }
+                        HevyIconButton(iconImageVector = Icons.Default.MoreVert)
+                    }
+                    Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)) {
+                        BasicTextField(
+                            value = "Add notes here...",
+                            onValueChange = {},
+                            textStyle = LocalTextStyle.current.copy(color = Color.Gray),
+                        )
+
+                    }
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        TextButton(onClick = {}) {
+                            HevyIconButton(iconDrawableId = R.drawable.restart)
+                            Text(
+                                text = "Rest Timer: OFF",
+                                color = Color.Cyan,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                        }
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+
+                        )
+                    {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            TextButton(onClick = {}) {
+                                Text(
+                                    text = "SET",
+                                    color = Color.Gray,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
+                            TextButton(onClick = {}) {
+                                Text(
+                                    text = "1",
+                                    color = Color.White,
+                                    style = MaterialTheme.typography.titleLarge
+                                )
+                            }
+                        }
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            TextButton(onClick = {}) {
+                                Text(
+                                    text = "PREVIOUS",
+                                    color = Color.Gray,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
+                            TextButton(onClick = {}) {
+                                Text(
+                                    text = "-",
+                                    color = Color.White,
+                                    style = MaterialTheme.typography.titleLarge
+                                )
+                            }
+                        }
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            TextButton(onClick = {}) {
+                                Text(
+                                    text = "REPS",
+                                    color = Color.Gray,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
+                            TextButton(onClick = {}) {
+                                Text(
+                                    text = "0",
+                                    color = Color.White,
+                                    style = MaterialTheme.typography.titleLarge
+                                )
+                            }
+                        }
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            HevyIconButton(
+                                iconImageVector = Icons.Outlined.Check,
+                                tint = Color.Gray,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Button(onClick = {}, colors = ButtonDefaults.buttonColors(Color.Gray)) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Check,
+                                    contentDescription = null,
+                                    tint = Color.White
+                                )
+                            }
+                        }
+                    }
+                    Row {
+                        HevySecondaryButton(text = "+ Add Set", modifier = Modifier.fillMaxWidth())
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                }
+                Spacer(modifier = Modifier.height(24.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -125,7 +275,7 @@ fun StartEmptyWorkout() {
                 {
                     HevySecondaryButton(
                         modifier = Modifier.weight(1f),
-                        text = "Settings"
+                        text = "Settings",
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     HevySecondaryButton(

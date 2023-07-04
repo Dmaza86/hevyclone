@@ -33,7 +33,7 @@ fun HevySecondaryButton(
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.bodyMedium
             )
     }
 }

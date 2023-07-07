@@ -1,5 +1,6 @@
 package com.example.hevyclone.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -31,7 +32,8 @@ fun HevyRoutinesCard(
         modifier = Modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Max)
-            .padding(bottom = 16.dp),
+            .padding(bottom = 16.dp)
+            .clickable {  },
         colors = CardDefaults.cardColors(Color.DarkGray)
     ) {
         Column(

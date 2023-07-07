@@ -3,6 +3,7 @@ package com.example.hevyclone.ui.component
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,17 +15,19 @@ import com.example.hevyclone.ui.ui.HevyCloneTheme
 @Composable
 fun HevyPrimaryButton(
     modifier: Modifier = Modifier,
-    label: String
+    label: String,
+    onClick: () -> Unit = {},
 ) {
     Button(
         modifier = modifier,
-        onClick = {},
+        onClick = onClick,
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.buttonColors(Color.Cyan)
     ) {
         Text(
             text = label,
-            color = Color.White
+            color = Color.White,
+            style = MaterialTheme.typography.titleMedium
         )
     }
 }

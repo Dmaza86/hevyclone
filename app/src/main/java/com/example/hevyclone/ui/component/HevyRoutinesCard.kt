@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,16 +28,19 @@ import com.example.hevyclone.ui.ui.HevyCloneTheme
 fun HevyRoutinesCard(
     title: String,
     text: String,
-    label: String
+    label: String,
+    cardColor: CardColors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
+    textColor: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Max)
             .padding(bottom = 16.dp)
-            .clickable {  },
-        colors = CardDefaults.cardColors(Color.DarkGray)
-    ) {
+            .clickable { },
+        colors = cardColor,
+
+        ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -58,6 +63,7 @@ fun HevyRoutinesCard(
             Text(
                 text = text,
                 overflow = TextOverflow.Ellipsis,
+                color = textColor,
                 maxLines = 2,
             )
             HevyPrimaryButton(label = label, modifier = Modifier.fillMaxWidth())
@@ -69,11 +75,6 @@ fun HevyRoutinesCard(
 @Composable
 fun HevyCardPreview() {
     HevyCloneTheme(darkTheme = true, dynamicColor = false) {
-        HevyRoutinesCard(
-            title = "Push #1",
-            text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",
-            label = "Start Routine"
-        )
         HevyRoutinesCard(
             title = "Push #1",
             text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",

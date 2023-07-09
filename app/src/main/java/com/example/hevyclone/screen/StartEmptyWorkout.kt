@@ -16,7 +16,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -45,7 +44,6 @@ import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyPrimaryButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
-import com.example.hevyclone.ui.component.HevyTable
 import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 @Composable
@@ -53,7 +51,9 @@ fun StartEmptyWorkout() {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
-                text = "Log Workout", style = MaterialTheme.typography.titleLarge, maxLines = 1
+                text = "Log Workout",
+                style = MaterialTheme.typography.titleLarge.copy(MaterialTheme.colorScheme.onPrimary),
+                maxLines = 1
             )
         },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.DarkGray),
@@ -87,7 +87,11 @@ fun StartEmptyWorkout() {
                 horizontalArrangement = Arrangement.SpaceBetween
             )
             {
-                HevyDoubleTextButton(title = "Duration", content = "9s", color = Color.Cyan)
+                HevyDoubleTextButton(
+                    title = "Duration",
+                    content = "9s",
+                    color = MaterialTheme.colorScheme.secondary
+                )
                 HevyDoubleTextButton(title = "Volume", content = "0 lbs")
                 HevyDoubleTextButton(title = "Sets", content = "0")
             }
@@ -112,8 +116,8 @@ fun StartEmptyWorkout() {
                         TextButton(
                             onClick = {},
                             colors = ButtonDefaults.buttonColors(
-                                contentColor = Color.Cyan,
-                                containerColor = Color.Transparent
+                                containerColor = Color.Transparent,
+                                contentColor = MaterialTheme.colorScheme.secondary
                             )
                         ) {
                             Icon(
@@ -132,7 +136,7 @@ fun StartEmptyWorkout() {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         HevyBasicTextField(
                             placeholder = "Add notes here...",
-                            style = MaterialTheme.typography.bodyLarge.copy(Color.Gray),
+                            style = MaterialTheme.typography.bodyLarge,
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
                         )
                     }
@@ -141,7 +145,7 @@ fun StartEmptyWorkout() {
                             HevyIconButton(iconDrawableId = R.drawable.restart)
                             Text(
                                 text = "Rest Timer: OFF",
-                                color = Color.Cyan,
+                                color = MaterialTheme.colorScheme.secondary,
                                 style = MaterialTheme.typography.titleMedium
                             )
                         }
@@ -187,7 +191,7 @@ fun StartEmptyWorkout() {
                     HevySecondaryButton(
                         modifier = Modifier.weight(1f),
                         text = "Discard Workout",
-                        color = Color.Red
+                        textColor = MaterialTheme.colorScheme.onError
                     )
                 }
             }
@@ -225,7 +229,10 @@ private fun EmptyView() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = "Add an exercise to start your workout")
+            Text(
+                text = "Add an exercise to start your workout",
+                color = MaterialTheme.colorScheme.onSurface
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
     }

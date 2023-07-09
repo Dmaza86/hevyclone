@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,7 +21,7 @@ fun HevyIconButton(
     iconImageVector: ImageVector? = null,
     @DrawableRes iconDrawableId: Int? = null,
     onClick: () -> Unit = {},
-    tint: Color = Color.Cyan
+    tint:Color = MaterialTheme.colorScheme.secondary
 ) {
     IconButton(onClick = onClick) {
         if (iconImageVector != null) {
@@ -44,7 +45,7 @@ fun HevyIconButton(
 @Preview
 @Composable
 fun HevyIconButtonPreview() {
-    HevyCloneTheme (darkTheme = true, dynamicColor = false) {
+    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
         HevyIconButton(iconDrawableId = R.drawable.clipboard)
     }
 }

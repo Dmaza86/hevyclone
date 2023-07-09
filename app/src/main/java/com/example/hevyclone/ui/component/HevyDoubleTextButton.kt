@@ -15,14 +15,14 @@ import com.example.hevyclone.ui.ui.HevyCloneTheme
 fun HevyDoubleTextButton(
     title: String,
     content: String,
-    color: Color = Color.White,
+    color: Color = MaterialTheme.colorScheme.onPrimary,
     onClick: () -> Unit = {},
 ) {
     TextButton(onClick) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 title,
-                color = MaterialTheme.colorScheme.onBackground,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Light,
                 style = MaterialTheme.typography.bodySmall
             )

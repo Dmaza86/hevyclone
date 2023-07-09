@@ -26,7 +26,8 @@ import com.example.hevyclone.ui.ui.HevyCloneTheme
 @Composable
 fun HevyBasicTextField(
     placeholder: String,
-    style: TextStyle = MaterialTheme.typography.titleLarge.copy(Color.White),
+    style: TextStyle = MaterialTheme.typography.titleLarge,
+    color: Color = MaterialTheme.colorScheme.onSurface,
     keyboardOptions: KeyboardOptions
 ) {
     var text by remember { mutableStateOf("") }
@@ -37,6 +38,7 @@ fun HevyBasicTextField(
             Text(
                 text = placeholder,
                 style = style,
+                color = color,
                 modifier = Modifier.padding(start = 16.dp, top = 16.dp)
             )
         }

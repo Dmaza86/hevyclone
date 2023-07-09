@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,12 +34,14 @@ fun HevySecondaryIconButton(
     iconImageVector: ImageVector? = null,
     @DrawableRes iconDrawableId: Int? = null,
     onClick: () -> Unit = {},
-    color: Color = Color.White,
+    colors: ButtonColors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+    tint: Color = MaterialTheme.colorScheme.secondary
+
 ) {
     Button(
         modifier = modifier,
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray),
+        colors = colors,
         shape = RoundedCornerShape(8.dp)
     ) {
         Row(
@@ -51,20 +54,19 @@ fun HevySecondaryIconButton(
                     modifier = Modifier.size(30.dp),
                     imageVector = iconImageVector,
                     contentDescription = null,
-                    tint = Color.Cyan
+                    tint = tint
                 )
             } else if (iconDrawableId != null) {
                 Icon(
                     modifier = Modifier.size(30.dp),
                     painter = painterResource(id = iconDrawableId),
                     contentDescription = null,
-                    tint = Color.Cyan
+                    tint = tint
                 )
             }
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = text,
-                color = color,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = MaterialTheme.typography.labelLarge

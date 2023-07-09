@@ -34,7 +34,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,15 +53,16 @@ fun Workout() {
             CenterAlignedTopAppBar(title = {
                 Text(
                     text = "Workout",
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.DarkGray),
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
                 navigationIcon = {
                     TextButton(onClick = {}) {
                         Text(
                             text = "PRO",
-                            color = Color.Yellow,
+                            color = MaterialTheme.colorScheme.tertiary,
                             fontWeight = FontWeight.ExtraBold,
                             style = MaterialTheme.typography.titleLarge
                         )
@@ -75,7 +75,7 @@ fun Workout() {
                     )
                 })
         }, bottomBar = {
-            NavigationBar(containerColor = Color.DarkGray) {
+            NavigationBar(containerColor = MaterialTheme.colorScheme.primary) {
                 NavigationBarItem(
                     icon = {
                         Icon(
@@ -88,7 +88,11 @@ fun Workout() {
                     selected = false,
                     onClick = {})
                 NavigationBarItem(
-                    colors = NavigationBarItemDefaults.colors(Color.Cyan, indicatorColor = Color.DarkGray, selectedTextColor = Color.Cyan),
+                    colors = NavigationBarItemDefaults.colors(
+                        MaterialTheme.colorScheme.secondary,
+                        indicatorColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.secondary
+                    ),
                     icon = {
                         Icon(
                             modifier = Modifier.size(30.dp),

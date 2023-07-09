@@ -34,8 +34,8 @@ fun HevyIconTitleButton(
     TextButton(
         modifier = modifier,
         onClick = onClick,
-        colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onBackground),
-        contentPadding = PaddingValues(0.dp)
+        colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.primary),
+        contentPadding = PaddingValues(0.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
                 if (iconImageVector != null) {
@@ -43,14 +43,14 @@ fun HevyIconTitleButton(
                         modifier = Modifier.size(20.dp),
                         imageVector = iconImageVector,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 } else if (iconDrawableId != null) {
                     Icon(
                         modifier = Modifier.size(20.dp),
                         painter = painterResource(id = iconDrawableId),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
                 Spacer(modifier = Modifier.width(8.dp))

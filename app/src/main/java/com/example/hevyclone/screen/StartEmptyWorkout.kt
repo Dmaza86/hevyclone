@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -44,6 +45,7 @@ import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyPrimaryButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
+import com.example.hevyclone.ui.component.HevyTable
 import com.example.hevyclone.ui.ui.HevyCloneTheme
 
 @Composable
@@ -92,7 +94,7 @@ fun StartEmptyWorkout() {
             Divider(color = Color.LightGray, thickness = 1.dp)
 
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)) {
-                if (false) {
+                if (true) {
                     EmptyView()
                 }
                 Card(
@@ -144,15 +146,17 @@ fun StartEmptyWorkout() {
                             )
                         }
                     }
-
-
-
-
-
-
-
-
-
+//                    HevyTable(
+//                        textHeader1 = "SET",
+//                        textHeader2 = "PREVIOUS",
+//                        textHeader3 = "KG",
+//                        textHeader4 = "REPS",
+//                        iconImageVector = Icons.Outlined.Check,
+//                        textColumn1 = "1",
+//                        textColumn2 = "-",
+//                        placeholder1 = "0",
+//                        placeholder2 = "0"
+//                    )
                     Row {
                         HevySecondaryButton(
                             text = "+ Add Set",

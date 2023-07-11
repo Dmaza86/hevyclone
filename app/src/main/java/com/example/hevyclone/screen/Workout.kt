@@ -42,7 +42,7 @@ import com.example.hevyclone.R
 import com.example.hevyclone.ui.component.HeavyTitleMedium
 import com.example.hevyclone.ui.component.HevyIconTitleButton
 import com.example.hevyclone.ui.component.HevyRoutinesCard
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyCloneTheme
 import com.example.hevyclone.ui.component.HevySecondaryIconButton
 import com.example.hevyclone.ui.component.HevyIconButton
 

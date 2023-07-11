@@ -103,12 +103,12 @@ fun HevyTable(
                 modifier = Modifier.padding(end = 8.dp)
             ) {
                 SmallFloatingActionButton(
-                    onClick
+                    onClick,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Check,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimary
+                        contentDescription = null
                     )
                 }
             }

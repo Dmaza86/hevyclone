@@ -87,28 +87,30 @@ fun HevyTable(
                     )
                 }
             }
-            Column() {
+            Column {
                 HevyBasicTextField(
                     placeholder = placeholder1,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
             }
-            Column() {
+            Column {
                 HevyBasicTextField(
                     placeholder = placeholder2,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
             }
-            SmallFloatingActionButton(
-                onClick,
-                containerColor = MaterialTheme.colorScheme.onSurface,
+            Column(
                 modifier = Modifier.padding(end = 8.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Check,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
+                SmallFloatingActionButton(
+                    onClick
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Check,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
             }
         }
     }

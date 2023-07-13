@@ -1,8 +1,10 @@
 package com.example.hevyclone.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,25 +23,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
-//
-// @Composable
-// fun RowScope.HevyCell(
-//     modifier: Modifier = Modifier,
-//     content: @Composable () -> Unit
-// ) {
-//     Box(
-//         modifier = modifier then Modifier.weight(1f).fillMaxWidth()
-//     ){
-//         content()
-//     }
-// }
-
-
+@Composable
+fun RowScope.TableCell(
+    weight: Float = 2f,
+    content: @Composable () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .weight(weight)
+            .fillMaxWidth()
+            .padding(2.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        content()
+    }
+}
 
 @Composable
 fun HevyTable() {
@@ -53,17 +57,25 @@ fun HevyTable() {
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                HevyHeaderButton(Modifier.weight(1f).fillMaxWidth().padding(4.dp),text = "SET")
-                HevyHeaderButton(Modifier.weight(2f).fillMaxWidth().padding(4.dp),text = "PREVIOUS")
-                HevyHeaderButton(Modifier.weight(2f).fillMaxWidth().padding(4.dp),text = "KG")
-                HevyHeaderButton(Modifier.weight(2f).fillMaxWidth().padding(4.dp),text = "REPS")
-                HevyIconButton(
-                    iconImageVector = Icons.Outlined.Check,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier
-                        .weight(1f)
-                        .size(24.dp)
-                )
+                TableCell(weight = 1f) {
+                    HevyHeaderButton(text = "SET")
+                }
+                TableCell {
+                    HevyHeaderButton(text = "PREVIOUS")
+                }
+                TableCell {
+                    HevyHeaderButton(text = "KG")
+                }
+                TableCell {
+                    HevyHeaderButton(text = "REPS")
+                }
+                TableCell(weight = 1f) {
+                    HevyIconButton(
+                        iconImageVector = Icons.Outlined.Check,
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
             }
         }
         item {
@@ -73,39 +85,56 @@ fun HevyTable() {
                 verticalAlignment = Alignment.CenterVertically
 
             ) {
-                TextButton(onClick = {}, modifier = Modifier.weight(1f).fillMaxWidth().padding(4.dp)) {
-                    Text(
-                        text = "1",
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        style = MaterialTheme.typography.titleLarge
+                TableCell(weight = 1f) {
+                    TextButton(
+                        onClick = {},
+                        // modifier = Modifier.fillMaxWidth(),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            text = "1",
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
+                }
+                TableCell {
+                    TextButton(
+                        onClick = {},
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            text = "24kg x 10",
+                            color = MaterialTheme.colorScheme.onSurface,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
+                }
+                TableCell {
+                    HevyBasicTextField(
+                        placeholder = "0",
+                        style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
-                TextButton(onClick = {}, modifier = Modifier.weight(2f).fillMaxWidth().padding(4.dp)) {
-                    Text(
-                        text = "-",
-                        color = MaterialTheme.colorScheme.onSurface,
-                        style = MaterialTheme.typography.titleLarge
+                TableCell {
+                    HevyBasicTextField(
+                        placeholder = "0",
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
-                HevyBasicTextField(
-                    modifier = Modifier.weight(2f).fillMaxWidth().padding(4.dp),
-                    placeholder = "0",
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-                HevyBasicTextField(
-                    modifier = Modifier.weight(2f).fillMaxWidth().padding(4.dp),
-                    placeholder = "0",
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-                SmallFloatingActionButton(
-                    onClick = {},
-                    modifier = Modifier.weight(1f).fillMaxWidth().padding(4.dp),
-                    contentColor = MaterialTheme.colorScheme.onPrimary
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Check,
-                        contentDescription = null
-                    )
+                TableCell(weight = 1f) {
+                    SmallFloatingActionButton(
+                        onClick = {},
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Check,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
         }
@@ -117,11 +146,17 @@ fun HevyHeaderButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     text: String,
-    color: Color = Color.Gray,
+    color: Color = MaterialTheme.colorScheme.onSurface,
     style: TextStyle = MaterialTheme.typography.titleMedium
 ) {
-    TextButton(onClick, modifier = modifier) {
+    TextButton(
+        onClick = onClick,
+        modifier = modifier,
+        contentPadding = PaddingValues(0.dp)
+    ) {
         Text(
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
             text = text,
             color = color,
             style = style,
@@ -138,11 +173,3 @@ fun HevyTablePreview() {
         HevyTable()
     }
 }
-//
-// @Preview
-// @Composable
-// fun HevyTable2Preview() {
-//     HevyPreviewTheme {
-//         HevyTable2()
-//     }
-// }

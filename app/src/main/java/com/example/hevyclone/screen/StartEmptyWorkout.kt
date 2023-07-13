@@ -98,7 +98,7 @@ fun StartEmptyWorkout() {
             Divider(color = Color.LightGray, thickness = 1.dp)
 
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)) {
-                if (true) {
+                if (false) {
                     EmptyView()
                 }
                 Card(

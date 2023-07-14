@@ -2,6 +2,7 @@ package com.example.hevyclone.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
@@ -47,94 +49,88 @@ fun RowScope.TableCell(
 
 @Composable
 fun HevyTable() {
-    LazyColumn(
-        modifier = Modifier
-            .padding(16.dp)
-    ) {
-        item {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TableCell(weight = 1f) {
-                    HevyHeaderButton(text = "SET")
-                }
-                TableCell {
-                    HevyHeaderButton(text = "PREVIOUS")
-                }
-                TableCell {
-                    HevyHeaderButton(text = "KG")
-                }
-                TableCell {
-                    HevyHeaderButton(text = "REPS")
-                }
-                TableCell(weight = 1f) {
-                    HevyIconButton(
-                        iconImageVector = Icons.Outlined.Check,
-                        tint = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.size(24.dp)
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TableCell(weight = 1f) {
+                HevyHeaderButton(text = "SET")
+            }
+            TableCell {
+                HevyHeaderButton(text = "PREVIOUS")
+            }
+            TableCell {
+                HevyHeaderButton(text = "KG")
+            }
+            TableCell {
+                HevyHeaderButton(text = "REPS")
+            }
+            TableCell(weight = 1f) {
+                HevyIconButton(
+                    iconImageVector = Icons.Outlined.Check,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+
+        ) {
+            TableCell(weight = 1f) {
+                TextButton(
+                    onClick = {},
+                    // modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "1",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        style = MaterialTheme.typography.titleMedium
                     )
                 }
             }
-        }
-        item {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-
-            ) {
-                TableCell(weight = 1f) {
-                    TextButton(
-                        onClick = {},
-                        // modifier = Modifier.fillMaxWidth(),
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Text(
-                            text = "1",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth(),
-                            color = MaterialTheme.colorScheme.onPrimary,
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                    }
-                }
-                TableCell {
-                    TextButton(
-                        onClick = {},
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Text(
-                            text = "24kg x 10",
-                            color = MaterialTheme.colorScheme.onSurface,
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                    }
-                }
-                TableCell {
-                    HevyBasicTextField(
-                        placeholder = "0",
-                        style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            TableCell {
+                TextButton(
+                    onClick = {},
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "24kg x 10",
+                        color = MaterialTheme.colorScheme.onSurface,
+                        style = MaterialTheme.typography.titleMedium
                     )
                 }
-                TableCell {
-                    HevyBasicTextField(
-                        placeholder = "0",
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            }
+            TableCell {
+                HevyBasicTextField(
+                    placeholder = "0",
+                    style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+            }
+            TableCell {
+                HevyBasicTextField(
+                    placeholder = "0",
+                    style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+            }
+            TableCell(weight = 1f) {
+                SmallFloatingActionButton(
+                    onClick = {},
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Check,
+                        contentDescription = null
                     )
-                }
-                TableCell(weight = 1f) {
-                    SmallFloatingActionButton(
-                        onClick = {},
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Check,
-                            contentDescription = null
-                        )
-                    }
                 }
             }
         }

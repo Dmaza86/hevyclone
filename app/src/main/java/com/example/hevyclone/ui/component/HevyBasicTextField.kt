@@ -57,8 +57,8 @@ fun HevyBasicTextField(
         singleLine = true,
         decorationBox = { innerTextField ->
             Box(
-                modifier = modifier then Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                modifier = modifier then Modifier.fillMaxWidth(),
+                contentAlignment = if(align == TextAlign.Center) Alignment.Center else Alignment.TopStart
             ) {
                 if (isPlaceholderVisible) {
                     Text(
@@ -81,6 +81,7 @@ fun HevyBasicTextFieldPreview() {
     HevyCloneTheme(darkTheme = true) {
         HevyBasicTextField(
             placeholder = "Add notes here...",
+            align = TextAlign.Start,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         )
     }

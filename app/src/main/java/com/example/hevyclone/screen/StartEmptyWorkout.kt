@@ -3,6 +3,7 @@
     ExperimentalMaterial3Api::class
 )
 
+import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -32,6 +34,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,6 +56,10 @@ import com.example.hevyclone.ui.theme.HevyCloneTheme
 
 @Composable
 fun StartEmptyWorkout() {
+    val exercises = remember {
+        mutableStateOf(listOf("Bench Press", "Squat", "Deadlift", "Overhead Press"))
+    }
+
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
@@ -85,7 +93,9 @@ fun StartEmptyWorkout() {
             item {
                 Divider(color = Color.LightGray, thickness = 4.dp)
                 Row(
-                    modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 )
                 {
@@ -100,11 +110,13 @@ fun StartEmptyWorkout() {
                 Divider(color = Color.LightGray, thickness = 1.dp)
             }
             item {
-                if (false) {
+                if (exercises.value.isEmpty()) {
                     EmptyView()
                 }
             }
-            item {
+            items(items = exercises.value){ exercise ->
+                val sets = remember { mutableStateOf(listOf("1", "2", "3")) }
+                Spacer(modifier = Modifier.height(16.dp))
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -134,7 +146,7 @@ fun StartEmptyWorkout() {
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Ab Scissors",
+                                text = exercise,
                                 style = MaterialTheme.typography.titleLarge
                             )
                         }
@@ -168,7 +180,7 @@ fun StartEmptyWorkout() {
                             )
                         }
                     }
-                    HevyTable()
+                    HevyTable(sets.value)
                     Row {
                         HevySecondaryButton(
                             text = "+ Add Set",

@@ -1,6 +1,7 @@
 package com.example.hevyclone.ui.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -9,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
@@ -18,7 +20,10 @@ fun HevyDoubleTextButton(
     color: Color = MaterialTheme.colorScheme.onPrimary,
     onClick: () -> Unit = {},
 ) {
-    TextButton(onClick) {
+    TextButton(
+        onClick = onClick,
+        contentPadding = PaddingValues(0.dp)
+    ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 title,

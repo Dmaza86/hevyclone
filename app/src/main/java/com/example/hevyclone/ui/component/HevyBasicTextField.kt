@@ -21,7 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevyBasicTextField(
@@ -61,7 +61,7 @@ fun HevyBasicTextField(
 @Preview
 @Composable
 fun HevyBasicTextFieldPreview() {
-    HevyCloneTheme(darkTheme = true) {
+    HevyPreviewTheme{
         HevyBasicTextField(
             placeholder = "Add notes here...",
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),

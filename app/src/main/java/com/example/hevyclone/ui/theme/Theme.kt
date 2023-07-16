@@ -1,4 +1,4 @@
-package com.example.hevyclone.ui.ui
+package com.example.hevyclone.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -25,7 +25,7 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = Gray600,
     onError = Red700,
     primaryContainer = Gray600
-    )
+)
 
 private val LightColorScheme = lightColorScheme(
 
@@ -39,6 +39,17 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
+
+@Composable
+fun HevyPreviewTheme(
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colorScheme = DarkColorScheme,
+        typography = MaterialTheme.typography,
+        content = content
+    )
+}
 
 @Composable
 fun HevyCloneTheme(
@@ -67,7 +78,7 @@ fun HevyCloneTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = MaterialTheme.typography,
         content = content
     )
 }

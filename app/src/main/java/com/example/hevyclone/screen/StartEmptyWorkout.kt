@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -44,7 +44,7 @@ import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyPrimaryButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun StartEmptyWorkout() {
@@ -241,7 +241,7 @@ private fun EmptyView() {
 @Preview
 @Composable
 fun StartEmptyWorkoutPreview() {
-    HevyCloneTheme(darkTheme = true) {
+    HevyPreviewTheme {
         StartEmptyWorkout()
     }
 }

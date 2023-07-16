@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevyRoutinesCard(
@@ -74,7 +74,7 @@ fun HevyRoutinesCard(
 @Preview
 @Composable
 fun HevyCardPreview() {
-    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
+    HevyPreviewTheme {
         HevyRoutinesCard(
             title = "Push #1",
             text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",

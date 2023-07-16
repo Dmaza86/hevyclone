@@ -20,8 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevyIconTitleButton(
@@ -65,7 +64,7 @@ fun HevyIconTitleButton(
 @Preview
 @Composable
 fun HevyIconTitleButtonPreview() {
-    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
+    HevyPreviewTheme {
         HevyIconTitleButton(text = "Button", iconImageVector = Icons.Default.ArrowDropDown)
     }
 }

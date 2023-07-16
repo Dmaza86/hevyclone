@@ -13,7 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevyIconButton(
@@ -45,7 +45,7 @@ fun HevyIconButton(
 @Preview
 @Composable
 fun HevyIconButtonPreview() {
-    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
+    HevyPreviewTheme {
         HevyIconButton(iconDrawableId = R.drawable.clipboard)
     }
 }

@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevyPrimaryButton(
@@ -38,7 +38,7 @@ fun HevyPrimaryButton(
 @Preview
 @Composable
 fun HevyPrimaryButtonPreview() {
-    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
+    HevyPreviewTheme {
         HevyPrimaryButton(label = "Start Routine")
     }
 }

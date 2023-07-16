@@ -25,7 +25,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 
 @Composable
@@ -133,7 +133,7 @@ fun HevyHeaderButton(
 @Preview
 @Composable
 fun HevyTablePreview() {
-    HevyCloneTheme(darkTheme = true) {
+    HevyPreviewTheme {
         HevyTable(
             textHeader1 = "SET",
             textHeader2 = "PREVIOUS",

@@ -11,7 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevySecondaryButton(
@@ -39,7 +39,7 @@ fun HevySecondaryButton(
 @Preview
 @Composable
 fun HevySecondaryButtonPreview() {
-    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
+    HevyPreviewTheme {
         HevySecondaryButton(
             text = "Discard Workout",
             textColor = MaterialTheme.colorScheme.onError

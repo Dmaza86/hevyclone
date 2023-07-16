@@ -1,4 +1,4 @@
-package com.example.hevyclone.ui.ui
+package com.example.hevyclone.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

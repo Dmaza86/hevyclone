@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.hevyclone.ui.ui.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevyDoubleTextButton(
@@ -39,7 +39,7 @@ fun HevyDoubleTextButton(
 @Preview
 @Composable
 fun HevyDoubleTextButtonPreview() {
-    HevyCloneTheme(darkTheme = true, dynamicColor = false) {
+    HevyPreviewTheme {
         HevyDoubleTextButton(title = "Duration", content = "9s")
 
     }

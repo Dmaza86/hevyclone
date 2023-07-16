@@ -1,4 +1,6 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class
+)
 
 package com.example.hevyclone.screen
 
@@ -40,11 +42,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
 import com.example.hevyclone.ui.component.HeavyTitleMedium
+import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyIconTitleButton
 import com.example.hevyclone.ui.component.HevyRoutinesCard
-import com.example.hevyclone.ui.ui.HevyCloneTheme
 import com.example.hevyclone.ui.component.HevySecondaryIconButton
-import com.example.hevyclone.ui.component.HevyIconButton
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun Workout() {
@@ -172,7 +174,7 @@ fun Workout() {
                     iconDrawableId = R.drawable.more_horizontal
                 )
             }
-            Column() {
+            Column {
                 HevyRoutinesCard(
                     title = "Push #1",
                     text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",
@@ -191,7 +193,7 @@ fun Workout() {
 @Preview
 @Composable
 fun WorkoutsPreview() {
-    HevyCloneTheme(darkTheme = true) {
+    HevyPreviewTheme {
         Workout()
     }
 }

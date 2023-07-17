@@ -44,8 +44,9 @@ fun RowScope.TableCell(
         content()
     }
 }
+
 @Composable
-fun HevyTable() {
+fun HevyTable(sets: List<String>) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -72,66 +73,69 @@ fun HevyTable() {
                 )
             }
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
+        sets.forEach { set ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
 
-        ) {
-            TableCell(weight = 1f) {
-                TextButton(
-                    onClick = {},
-                    contentPadding = PaddingValues(0.dp)
-                ) {
-                    Text(
-                        text = "1",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        style = MaterialTheme.typography.titleMedium
+            ) {
+                TableCell(weight = 1f) {
+                    TextButton(
+                        onClick = {},
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            text = set,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
+                }
+                TableCell {
+                    TextButton(
+                        onClick = {},
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Text(
+                            text = "24kg x 10",
+                            color = MaterialTheme.colorScheme.onSurface,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
+                }
+                TableCell {
+                    HevyBasicTextField(
+                        placeholder = "0",
+                        style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
-            }
-            TableCell {
-                TextButton(
-                    onClick = {},
-                    contentPadding = PaddingValues(0.dp)
-                ) {
-                    Text(
-                        text = "24kg x 10",
-                        color = MaterialTheme.colorScheme.onSurface,
-                        style = MaterialTheme.typography.titleMedium
+                TableCell {
+                    HevyBasicTextField(
+                        placeholder = "0",
+                        style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
-            }
-            TableCell {
-                HevyBasicTextField(
-                    placeholder = "0",
-                    style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-            }
-            TableCell {
-                HevyBasicTextField(
-                    placeholder = "0",
-                    style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-            }
-            TableCell(weight = 1f) {
-                SmallFloatingActionButton(
-                    onClick = {},
-                    contentColor = MaterialTheme.colorScheme.onPrimary
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Check,
-                        contentDescription = null
-                    )
+                TableCell(weight = 1f) {
+                    SmallFloatingActionButton(
+                        onClick = {},
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Check,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
         }
     }
 }
+
 @Composable
 fun HevyHeaderButton(
     modifier: Modifier = Modifier,
@@ -156,10 +160,11 @@ fun HevyHeaderButton(
         )
     }
 }
+
 @Preview
 @Composable
 fun HevyTablePreview() {
     HevyPreviewTheme {
-        HevyTable()
+        HevyTable(sets = listOf("1","2", "3"))
     }
 }

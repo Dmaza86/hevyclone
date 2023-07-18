@@ -35,12 +35,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
@@ -63,9 +66,17 @@ data class Folder(
 
 @Composable
 fun Workout() {
+    var content by remember { mutableStateOf(true) }
+
+    var profileSelected by remember { mutableStateOf(false) }
+
     val folders = remember {
         mutableStateOf(
             listOf(
+                Folder(
+                    "Phase0", emptyList(
+                    )
+                ),
                 Folder(
                     "Phase1", listOf(
                         Routine(
@@ -132,7 +143,10 @@ fun Workout() {
                     },
                     label = { Text(text = "Home") },
                     selected = false,
-                    onClick = {})
+                    onClick = {
+                        content = false
+                        profileSelected = false
+                    })
                 NavigationBarItem(
                     colors = NavigationBarItemDefaults.colors(
                         MaterialTheme.colorScheme.secondary,
@@ -148,7 +162,10 @@ fun Workout() {
                     },
                     label = { Text(text = "Workout") },
                     selected = true,
-                    onClick = {})
+                    onClick = {
+                        content = true
+                        profileSelected = false
+                    })
                 NavigationBarItem(
                     icon = {
                         Icon(
@@ -159,77 +176,105 @@ fun Workout() {
                     },
                     label = { Text(text = "Profile") },
                     selected = false,
-                    onClick = {})
+                    onClick = {
+                        content = false
+                        profileSelected = true
+                    })
             }
         }) { contentPadding ->
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .fillMaxWidth()
-                .padding(contentPadding)
-                .padding(horizontal = 16.dp, vertical = 16.dp)
-        ) {
-            Row {
-                HeavyTitleMedium(text = "Quick Start")
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row {
-                HevySecondaryIconButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = "Start Empty Workout",
-                    iconImageVector = Icons.Default.Add
-                )
+        if (content) {
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxWidth()
+                    .padding(contentPadding)
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
+            ) {
+                Row {
+                    HeavyTitleMedium(text = "Quick Start")
+                }
                 Spacer(modifier = Modifier.height(8.dp))
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                HeavyTitleMedium(text = "Routines")
-                HevyIconButton(iconDrawableId = R.drawable.new_folder)
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                HevySecondaryIconButton(
-                    modifier = Modifier.weight(1f),
-                    text = "New Routine",
-                    iconDrawableId = R.drawable.clipboard
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                HevySecondaryIconButton(
-                    modifier = Modifier.weight(1f),
-                    text = "Explore",
-                    iconImageVector = Icons.Default.Search
-                )
-            }
-            folders.value.forEach { folder ->
+                Row {
+                    HevySecondaryIconButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = "Start Empty Workout",
+                        iconImageVector = Icons.Default.Add
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    HevyIconTitleButton(
-                        text = folder.title,
-                        iconImageVector = Icons.Default.ArrowDropDown
+                    HeavyTitleMedium(text = "Routines")
+                    HevyIconButton(iconDrawableId = R.drawable.new_folder)
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    HevySecondaryIconButton(
+                        modifier = Modifier.weight(1f),
+                        text = "New Routine",
+                        iconDrawableId = R.drawable.clipboard
                     )
-                    HevyIconButton(
-                        iconDrawableId = R.drawable.more_horizontal
+                    Spacer(modifier = Modifier.width(8.dp))
+                    HevySecondaryIconButton(
+                        modifier = Modifier.weight(1f),
+                        text = "Explore",
+                        iconImageVector = Icons.Default.Search
                     )
                 }
-                folder.routines.forEach { routine ->
-                    HevyRoutinesCard(
-                        title = routine.title,
-                        text = routine.content,
-                        label = "Start Routine"
-                    )
+                folders.value.forEach { folder ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        HevyIconTitleButton(
+                            text = folder.title,
+                            iconImageVector = Icons.Default.ArrowDropDown
+                        )
+                        HevyIconButton(
+                            iconDrawableId = R.drawable.more_horizontal
+                        )
+                    }
+                    if (folder.routines.isEmpty()) {
+                        Text(text = "there is no routine")
+                    }
+                    folder.routines.forEach { routine ->
+                        HevyRoutinesCard(
+                            title = routine.title,
+                            text = routine.content,
+                            label = "Start Routine"
+                        )
+                    }
                 }
+            }
+        } else {
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxWidth()
+                    .padding(contentPadding)
+                    .padding(horizontal = 16.dp, vertical = 16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "No content available",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = if (profileSelected) MaterialTheme.colorScheme.onBackground
+                    else MaterialTheme.colorScheme.secondary,
+                    textAlign = TextAlign.Center
+                )
             }
         }
     }
 }
+
 
 @Preview
 @Composable

@@ -19,19 +19,24 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.hevyclone.ui.theme.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
 fun HevyBasicTextField(
     modifier: Modifier = Modifier,
     placeholder: String,
+    initialValue: String,
     style: TextStyle = MaterialTheme.typography.titleLarge,
     align: TextAlign = TextAlign.Center,
     color: Color = MaterialTheme.colorScheme.onSurface,
     keyboardOptions: KeyboardOptions
 ) {
-    var text by remember { mutableStateOf("") }
-    var isPlaceholderVisible by remember { mutableStateOf(true) }
+    var text by remember { mutableStateOf(initialValue) }
+    var isPlaceholderVisible by remember {
+        mutableStateOf(
+            initialValue.isEmpty()
+        )
+    }
 
     BasicTextField(
         value = text,
@@ -50,7 +55,7 @@ fun HevyBasicTextField(
         decorationBox = { innerTextField ->
             Box(
                 modifier = modifier then Modifier.fillMaxWidth(),
-                contentAlignment = if(align == TextAlign.Center) Alignment.Center else Alignment.TopStart
+                contentAlignment = if (align == TextAlign.Center) Alignment.Center else Alignment.TopStart
             ) {
                 if (isPlaceholderVisible) {
                     Text(
@@ -70,9 +75,16 @@ fun HevyBasicTextField(
 @Preview
 @Composable
 fun HevyBasicTextFieldPreview() {
-    HevyCloneTheme(darkTheme = true) {
+    HevyPreviewTheme() {
         HevyBasicTextField(
             placeholder = "Add notes here...",
+            initialValue = "bench press machine",
+            align = TextAlign.Start,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        )
+        HevyBasicTextField(
+            placeholder = "Add notes here...",
+            initialValue = "",
             align = TextAlign.Start,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         )

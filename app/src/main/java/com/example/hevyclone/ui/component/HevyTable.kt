@@ -46,9 +46,9 @@ fun RowScope.TableCell(
 }
 
 data class HevySet(
-    val setNumber: Int,
+    val setNumber: Number,
     val previous: String,
-    val weight: Double,
+    val weight: Number,
     val reps: Int,
     val done: Boolean
 )
@@ -109,7 +109,7 @@ fun HevyTable(sets: List<HevySet>) {
                         contentPadding = PaddingValues(0.dp)
                     ) {
                         Text(
-                            text = set.previous,
+                            text = set.previous.ifEmpty { "-" },
                             color = MaterialTheme.colorScheme.onSurface,
                             style = MaterialTheme.typography.titleMedium
                         )
@@ -117,14 +117,16 @@ fun HevyTable(sets: List<HevySet>) {
                 }
                 TableCell {
                     HevyBasicTextField(
-                        placeholder = set.weight.toString(),
+                        placeholder = "0",
+                        initialValue = set.weight.toString(),
                         style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
                 TableCell {
                     HevyBasicTextField(
-                        placeholder = set.reps.toString(),
+                        placeholder = "0",
+                        initialValue = set.reps.toString(),
                         style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
@@ -178,8 +180,8 @@ fun HevyTablePreview() {
             listOf(
                 HevySet(
                     setNumber = 1,
-                    previous = "20kgx13",
-                    weight = 23.3,
+                    previous = "",
+                    weight = 23,
                     reps = 5,
                     done = false
                 ),

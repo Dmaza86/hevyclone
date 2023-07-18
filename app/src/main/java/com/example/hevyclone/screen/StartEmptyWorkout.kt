@@ -51,11 +51,11 @@ import com.example.hevyclone.ui.component.HevyPrimaryButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
 import com.example.hevyclone.ui.component.HevySet
 import com.example.hevyclone.ui.component.HevyTable
-import com.example.hevyclone.ui.theme.HevyCloneTheme
+import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 data class Exercise(
     val title: String,
-//    val notes: String,
+    val notes: String,
     val sets: List<HevySet>
 )
 
@@ -66,6 +66,7 @@ fun StartEmptyWorkout() {
             listOf(
                 Exercise(
                     title = "Bench Press",
+                    notes = "",
                     listOf(
                         HevySet(
                             setNumber = 1,
@@ -77,7 +78,7 @@ fun StartEmptyWorkout() {
                         HevySet(
                             setNumber = 2,
                             previous = "53kgx20",
-                            weight = 78.54,
+                            weight = 78,
                             reps = 6,
                             done = true
                         ),
@@ -92,25 +93,26 @@ fun StartEmptyWorkout() {
                 ),
                 Exercise(
                     title = "Incline Bench Press",
+                    notes = "Do your bench press",
                     listOf(
                         HevySet(
                             setNumber = 1,
-                            previous = "55kgx10",
-                            weight = 53.5,
+                            previous = "",
+                            weight = 53,
                             reps = 2,
                             done = true
                         ),
                         HevySet(
                             setNumber = 2,
                             previous = "43kgx34",
-                            weight = 9.0,
+                            weight = 9.6,
                             reps = 12,
                             done = true
                         ),
                         HevySet(
                             setNumber = 3,
                             previous = "5kgx10",
-                            weight = 5.4,
+                            weight = 5,
                             reps = 33,
                             done = true
                         )
@@ -217,6 +219,7 @@ fun StartEmptyWorkout() {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             HevyBasicTextField(
                                 placeholder = "Add notes here...",
+                                initialValue = exercise.notes,
                                 style = MaterialTheme.typography.bodyLarge,
                                 align = TextAlign.Start,
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -331,7 +334,7 @@ private fun EmptyView() {
 @Preview
 @Composable
 fun StartEmptyWorkoutPreview() {
-    HevyCloneTheme(darkTheme = true) {
+    HevyPreviewTheme() {
         StartEmptyWorkout()
     }
 }

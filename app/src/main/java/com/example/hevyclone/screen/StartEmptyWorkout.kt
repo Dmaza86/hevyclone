@@ -1,6 +1,5 @@
 @file:OptIn(
     ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
     ExperimentalMaterial3Api::class
 )
 
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -51,13 +49,75 @@ import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyPrimaryButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
+import com.example.hevyclone.ui.component.HevySet
 import com.example.hevyclone.ui.component.HevyTable
 import com.example.hevyclone.ui.theme.HevyCloneTheme
+
+data class Exercise(
+    val title: String,
+//    val notes: String,
+    val sets: List<HevySet>
+)
 
 @Composable
 fun StartEmptyWorkout() {
     val exercises = remember {
-        mutableStateOf(listOf("Bench Press", "Squat", "Deadlift", "Overhead Press"))
+        mutableStateOf(
+            listOf(
+                Exercise(
+                    title = "Bench Press",
+                    listOf(
+                        HevySet(
+                            setNumber = 1,
+                            previous = "5kgx10",
+                            weight = 5.4,
+                            reps = 8,
+                            done = true
+                        ),
+                        HevySet(
+                            setNumber = 2,
+                            previous = "53kgx20",
+                            weight = 78.54,
+                            reps = 6,
+                            done = true
+                        ),
+                        HevySet(
+                            setNumber = 3,
+                            previous = "105kgx3",
+                            weight =154.6,
+                            reps = 14,
+                            done = true
+                        )
+                    )
+                ),
+                Exercise(
+                    title = "Incline Bench Press",
+                    listOf(
+                        HevySet(
+                            setNumber = 1,
+                            previous = "55kgx10",
+                            weight = 53.5,
+                            reps = 2,
+                            done = true
+                        ),
+                        HevySet(
+                            setNumber = 2,
+                            previous = "43kgx34",
+                            weight = 9.0,
+                            reps = 12,
+                            done = true
+                        ),
+                        HevySet(
+                            setNumber = 3,
+                            previous = "5kgx10",
+                            weight = 5.4,
+                            reps = 33,
+                            done = true
+                        )
+                    )
+                )
+            )
+        )
     }
 
     Scaffold(topBar = {
@@ -114,80 +174,82 @@ fun StartEmptyWorkout() {
                     EmptyView()
                 }
             }
-            items(items = exercises.value){ exercise ->
-                val sets = remember { mutableStateOf(listOf("1", "2", "3")) }
-                Spacer(modifier = Modifier.height(16.dp))
+            item {
+                exercises.value.forEach { exercise ->
 
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.background
-                    )
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    )
-                    {
-                        TextButton(
-                            onClick = {},
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.Transparent,
-                                contentColor = MaterialTheme.colorScheme.secondary
-                            ),
-                            contentPadding = PaddingValues(0.dp)
-                        ) {
-                            Icon(
-                                modifier = Modifier.size(28.dp),
-                                painter = painterResource(id = R.drawable.clipboard),
-                                contentDescription = null,
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = exercise,
-                                style = MaterialTheme.typography.titleLarge
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.background
+                        )
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        )
+                        {
+                            TextButton(
+                                onClick = {},
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color.Transparent,
+                                    contentColor = MaterialTheme.colorScheme.secondary
+                                ),
+                                contentPadding = PaddingValues(0.dp)
+                            ) {
+                                Icon(
+                                    modifier = Modifier.size(28.dp),
+                                    painter = painterResource(id = R.drawable.clipboard),
+                                    contentDescription = null,
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = exercise.title,
+                                    style = MaterialTheme.typography.titleLarge
+                                )
+                            }
+                            HevyIconButton(iconImageVector = Icons.Default.MoreVert)
+                        }
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            HevyBasicTextField(
+                                placeholder = "Add notes here...",
+                                style = MaterialTheme.typography.bodyLarge,
+                                align = TextAlign.Start,
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
                             )
                         }
-                        HevyIconButton(iconImageVector = Icons.Default.MoreVert)
-                    }
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        HevyBasicTextField(
-                            placeholder = "Add notes here...",
-                            style = MaterialTheme.typography.bodyLarge,
-                            align = TextAlign.Start,
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-                        )
-                    }
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        TextButton(
-                            onClick = {},
-                            contentPadding = PaddingValues(0.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.Transparent,
-                                contentColor = MaterialTheme.colorScheme.secondary
-                            )
-                        ) {
-                            Icon(
-                                painterResource(id = R.drawable.timer),
-                                contentDescription = null
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = "Rest Timer: OFF",
-                                style = MaterialTheme.typography.titleMedium
-                            )
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            TextButton(
+                                onClick = {},
+                                contentPadding = PaddingValues(0.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color.Transparent,
+                                    contentColor = MaterialTheme.colorScheme.secondary
+                                )
+                            ) {
+                                Icon(
+                                    painterResource(id = R.drawable.timer),
+                                    contentDescription = null
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = "Rest Timer: OFF",
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
                         }
-                    }
-                    HevyTable(sets.value)
-                    Row {
-                        HevySecondaryButton(
-                            text = "+ Add Set",
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
+                        HevyTable(sets = exercise.sets)
+                        Row {
+                            HevySecondaryButton(
+                                text = "+ Add Set",
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
                     }
                 }
             }

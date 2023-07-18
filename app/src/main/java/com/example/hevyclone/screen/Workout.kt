@@ -1,4 +1,5 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
+@file:OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
     ExperimentalMaterial3Api::class
 )
 
@@ -34,6 +35,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -48,8 +51,49 @@ import com.example.hevyclone.ui.component.HevyRoutinesCard
 import com.example.hevyclone.ui.component.HevySecondaryIconButton
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
+data class Routine(
+    val title: String,
+    val content: String
+)
+
+data class Folder(
+    val title: String,
+    val routines: List<Routine>
+)
+
 @Composable
 fun Workout() {
+    val folders = remember {
+        mutableStateOf(
+            listOf(
+                Folder(
+                    "Phase1", listOf(
+                        Routine(
+                            "Push",
+                            "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback."
+                        ),
+                        Routine(
+                            "Leg",
+                            "Calf, Squats"
+                        )
+                    )
+                ),
+                Folder(
+                    "Phase2", listOf(
+                        Routine(
+                            "Push",
+                            "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback."
+                        ),
+                        Routine(
+                            "Leg",
+                            "Calf, Squats"
+                        )
+                    )
+                )
+            )
+        )
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(title = {
@@ -161,30 +205,27 @@ fun Workout() {
                     iconImageVector = Icons.Default.Search
                 )
             }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                HevyIconTitleButton(
-                    text = "Phase 2:",
-                    iconImageVector = Icons.Default.ArrowDropDown
-                )
-                HevyIconButton(
-                    iconDrawableId = R.drawable.more_horizontal
-                )
-            }
-            Column {
-                HevyRoutinesCard(
-                    title = "Push #1",
-                    text = "Bench Press, Incline Bench Press, Lateral Raise, Triceps Extension, Cable Triceps Kickback.",
-                    label = "Start Routine"
-                )
-                HevyRoutinesCard(
-                    title = "Legs #1",
-                    text = "Squat, Deadlift, Leg Extension, Seated Calf Raise Cable.",
-                    label = "Start Routine"
-                )
+            folders.value.forEach { folder ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    HevyIconTitleButton(
+                        text = folder.title,
+                        iconImageVector = Icons.Default.ArrowDropDown
+                    )
+                    HevyIconButton(
+                        iconDrawableId = R.drawable.more_horizontal
+                    )
+                }
+                folder.routines.forEach { routine ->
+                    HevyRoutinesCard(
+                        title = routine.title,
+                        text = routine.content,
+                        label = "Start Routine"
+                    )
+                }
             }
         }
     }

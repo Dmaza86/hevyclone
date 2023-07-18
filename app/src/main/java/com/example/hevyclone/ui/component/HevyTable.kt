@@ -45,8 +45,17 @@ fun RowScope.TableCell(
     }
 }
 
+data class HevySet(
+    val setNumber: Int,
+    val previous: String,
+    val weight: Double,
+    val reps: Int,
+    val done: Boolean
+)
+
 @Composable
-fun HevyTable(sets: List<String>) {
+fun HevyTable(sets: List<HevySet>) {
+
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -86,7 +95,7 @@ fun HevyTable(sets: List<String>) {
                         contentPadding = PaddingValues(0.dp)
                     ) {
                         Text(
-                            text = set,
+                            text = set.setNumber.toString(),
                             textAlign = TextAlign.Center,
                             modifier = Modifier.fillMaxWidth(),
                             color = MaterialTheme.colorScheme.onPrimary,
@@ -100,7 +109,7 @@ fun HevyTable(sets: List<String>) {
                         contentPadding = PaddingValues(0.dp)
                     ) {
                         Text(
-                            text = "24kg x 10",
+                            text = set.previous,
                             color = MaterialTheme.colorScheme.onSurface,
                             style = MaterialTheme.typography.titleMedium
                         )
@@ -108,14 +117,14 @@ fun HevyTable(sets: List<String>) {
                 }
                 TableCell {
                     HevyBasicTextField(
-                        placeholder = "0",
+                        placeholder = set.weight.toString(),
                         style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
                 TableCell {
                     HevyBasicTextField(
-                        placeholder = "0",
+                        placeholder = set.reps.toString(),
                         style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
@@ -165,6 +174,31 @@ fun HevyHeaderButton(
 @Composable
 fun HevyTablePreview() {
     HevyPreviewTheme {
-        HevyTable(sets = listOf("1","2", "3"))
+        HevyTable(
+            listOf(
+                HevySet(
+                    setNumber = 1,
+                    previous = "20kgx13",
+                    weight = 23.3,
+                    reps = 5,
+                    done = false
+                ),
+                HevySet(
+                    setNumber = 2,
+                    previous = "133kgx12",
+                    weight = 240.3,
+                    reps = 23,
+                    done = false
+                ),
+                HevySet(
+                    setNumber = 2,
+                    previous = "3kgx12",
+                    weight = 34.3,
+                    reps = 13,
+                    done = false
+                )
+            )
+        )
+
     }
 }

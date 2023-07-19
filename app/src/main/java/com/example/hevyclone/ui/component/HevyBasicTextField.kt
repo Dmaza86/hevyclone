@@ -2,7 +2,6 @@ package com.example.hevyclone.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -52,7 +51,8 @@ fun HevyBasicTextField(
         keyboardOptions = keyboardOptions,
         textStyle = LocalTextStyle.current.copy(
             textAlign = align,
-            color = color
+            color = color,
+            fontSize = style.fontSize
         ),
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
@@ -81,24 +81,19 @@ fun HevyBasicTextField(
 fun HevyBasicTextFieldPreview() {
     HevyPreviewTheme() {
         Column {
-            Row {
-                HevyBasicTextField(
-                    placeholder = "Add notes here...",
-                    initialValue = "",
-                    align = TextAlign.Start,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                )
-                Spacer(modifier = Modifier.height(30.dp))
-            }
-            Row() {
-                HevyBasicTextField(
-                    placeholder = "",
-                    initialValue = "3up/3down",
-                    align = TextAlign.Start,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                )
-            }
-
+            HevyBasicTextField(
+                placeholder = "Add notes here...",
+                initialValue = "",
+                align = TextAlign.Start,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            HevyBasicTextField(
+                placeholder = "",
+                initialValue = "3up/3down",
+                align = TextAlign.Start,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            )
         }
     }
 }

@@ -1,7 +1,11 @@
 package com.example.hevyclone.ui.component
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LocalTextStyle
@@ -19,6 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
@@ -47,7 +52,6 @@ fun HevyBasicTextField(
         keyboardOptions = keyboardOptions,
         textStyle = LocalTextStyle.current.copy(
             textAlign = align,
-            fontSize = MaterialTheme.typography.titleLarge.fontSize,
             color = color
         ),
         modifier = Modifier.fillMaxWidth(),
@@ -76,17 +80,25 @@ fun HevyBasicTextField(
 @Composable
 fun HevyBasicTextFieldPreview() {
     HevyPreviewTheme() {
-        HevyBasicTextField(
-            placeholder = "Add notes here...",
-            initialValue = "bench press machine",
-            align = TextAlign.Start,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-        )
-        HevyBasicTextField(
-            placeholder = "Add notes here...",
-            initialValue = "",
-            align = TextAlign.Start,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-        )
+        Column {
+            Row {
+                HevyBasicTextField(
+                    placeholder = "Add notes here...",
+                    initialValue = "",
+                    align = TextAlign.Start,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+            }
+            Row() {
+                HevyBasicTextField(
+                    placeholder = "",
+                    initialValue = "3up/3down",
+                    align = TextAlign.Start,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                )
+            }
+
+        }
     }
 }

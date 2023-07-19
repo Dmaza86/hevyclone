@@ -127,13 +127,14 @@ fun HevyTable(sets: List<HevySet>) {
                     HevyBasicTextField(
                         placeholder = "0",
                         initialValue = set.reps.toString(),
-                        style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
+                        style = MaterialTheme.typography.titleLarge.copy(textAlign = TextAlign.Center),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
                 TableCell(weight = 1f) {
                     SmallFloatingActionButton(
                         onClick = {},
+                        modifier = Modifier.size(30.dp),
                         contentColor = MaterialTheme.colorScheme.onPrimary
                     ) {
                         Icon(

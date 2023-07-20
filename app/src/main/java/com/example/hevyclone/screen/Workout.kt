@@ -29,7 +29,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -64,11 +63,63 @@ data class Folder(
     val routines: List<Routine>
 )
 
+sealed class Tab {
+    object Home : Tab()
+    object Workout : Tab()
+    object Profile : Tab()
+}
+
+data class HevyNavItem(
+    val icon: @Composable () -> Unit,
+    val label: String,
+    val tab: Tab,
+)
+
 @Composable
 fun Workout() {
-    var content by remember { mutableStateOf(true) }
-
-    var profileSelected by remember { mutableStateOf(false) }
+    var selectedTab: Tab by remember { mutableStateOf(Tab.Workout) }
+//    var tabs: List<Tab> by remember {
+//        mutableStateOf(listOf(Tab.Home, Tab.Workout, Tab.Profile))
+//    }
+    var tabs: List<HevyNavItem> by remember {
+        mutableStateOf(
+            listOf(
+                HevyNavItem(
+                    icon = {
+                        Icon(
+                            Icons.Outlined.Home,
+                            modifier = Modifier.size(30.dp),
+                            contentDescription = null
+                        )
+                    },
+                    label = "Home",
+                    tab = Tab.Home,
+                ),
+                HevyNavItem(
+                    icon = {
+                        Icon(
+                            painterResource(id = R.drawable.dumbbell),
+                            modifier = Modifier.size(30.dp),
+                            contentDescription = null
+                        )
+                    },
+                    label = "Workout",
+                    tab = Tab.Workout
+                ),
+                HevyNavItem(
+                    icon = {
+                        Icon(
+                            Icons.Outlined.Person,
+                            modifier = Modifier.size(30.dp),
+                            contentDescription = null
+                        )
+                    },
+                    label = "Profile",
+                    tab = Tab.Profile
+                )
+            )
+        )
+    }
 
     val folders = remember {
         mutableStateOf(
@@ -133,56 +184,17 @@ fun Workout() {
                 })
         }, bottomBar = {
             NavigationBar(containerColor = MaterialTheme.colorScheme.primary) {
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Outlined.Home,
-                            modifier = Modifier.size(30.dp),
-                            contentDescription = null,
-                        )
-                    },
-                    label = { Text(text = "Home") },
-                    selected = false,
-                    onClick = {
-                        content = false
-                        profileSelected = false
-                    })
-                NavigationBarItem(
-                    colors = NavigationBarItemDefaults.colors(
-                        MaterialTheme.colorScheme.secondary,
-                        indicatorColor = MaterialTheme.colorScheme.primary,
-                        selectedTextColor = MaterialTheme.colorScheme.secondary
-                    ),
-                    icon = {
-                        Icon(
-                            modifier = Modifier.size(30.dp),
-                            painter = painterResource(id = R.drawable.dumbbell),
-                            contentDescription = null
-                        )
-                    },
-                    label = { Text(text = "Workout") },
-                    selected = true,
-                    onClick = {
-                        content = true
-                        profileSelected = false
-                    })
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Outlined.Person,
-                            contentDescription = null,
-                            modifier = Modifier.size(30.dp)
-                        )
-                    },
-                    label = { Text(text = "Profile") },
-                    selected = false,
-                    onClick = {
-                        content = false
-                        profileSelected = true
-                    })
+                tabs.forEach { tab ->
+                    NavigationBarItem(
+                        icon = tab.icon,
+                        label = { Text(text = tab.label) },
+                        selected = selectedTab == tab.tab,
+                        onClick = { selectedTab = tab.tab }
+                    )
+                }
             }
         }) { contentPadding ->
-        if (content) {
+        if (selectedTab is Tab.Workout) {
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
@@ -253,7 +265,7 @@ fun Workout() {
                     }
                 }
             }
-        } else {
+        } else if (selectedTab is Tab.Home) {
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
@@ -264,10 +276,26 @@ fun Workout() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "No content available",
+                    text = "No Home content available",
                     style = MaterialTheme.typography.titleLarge,
-                    color = if (profileSelected) MaterialTheme.colorScheme.onBackground
-                    else MaterialTheme.colorScheme.secondary,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    textAlign = TextAlign.Center
+                )
+            }
+        } else if (selectedTab is Tab.Profile) {
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxWidth()
+                    .padding(contentPadding)
+                    .padding(horizontal = 16.dp, vertical = 16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "No Profile content available",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSecondary,
                     textAlign = TextAlign.Center
                 )
             }

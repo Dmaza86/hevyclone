@@ -18,6 +18,10 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -54,7 +58,8 @@ data class HevySet(
 )
 
 @Composable
-fun HevyTable(sets: List<HevySet>) {
+fun HevyTable(initialSets: List<HevySet>) {
+    var sets by remember { mutableStateOf(initialSets) }
 
     Column {
         Row(
@@ -127,7 +132,7 @@ fun HevyTable(sets: List<HevySet>) {
                     HevyBasicTextField(
                         placeholder = "0",
                         initialValue = set.reps.toString(),
-                        style = MaterialTheme.typography.titleLarge.copy(textAlign = TextAlign.Center),
+                        style = MaterialTheme.typography.titleMedium.copy(textAlign = TextAlign.Center),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
                 }
@@ -145,6 +150,19 @@ fun HevyTable(sets: List<HevySet>) {
                 }
             }
         }
+        HevySecondaryButton(
+            text = "+ Add Set",
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                sets = sets + HevySet(
+                    setNumber = sets.size + 1,
+                    previous = "",
+                    weight = 0,
+                    reps = 0,
+                    done = true
+                )
+            }
+        )
     }
 }
 
@@ -194,7 +212,7 @@ fun HevyTablePreview() {
                     done = false
                 ),
                 HevySet(
-                    setNumber = 2,
+                    setNumber = 3,
                     previous = "3kgx12",
                     weight = 34.3,
                     reps = 13,

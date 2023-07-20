@@ -245,14 +245,7 @@ fun StartEmptyWorkout() {
                                 )
                             }
                         }
-                        HevyTable(sets = exercise.sets)
-                        Row {
-                            HevySecondaryButton(
-                                text = "+ Add Set",
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                        }
+                        HevyTable(initialSets = exercise.sets)
                     }
                 }
             }

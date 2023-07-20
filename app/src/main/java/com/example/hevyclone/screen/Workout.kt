@@ -200,110 +200,116 @@ fun Workout() {
                 }
             }
         }) { contentPadding ->
-        if (selectedTab is Tab.Workout) {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .fillMaxWidth()
-                    .padding(contentPadding)
-                    .padding(horizontal = 16.dp, vertical = 16.dp)
-            ) {
-                Row {
-                    HeavyTitleMedium(text = "Quick Start")
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row {
-                    HevySecondaryIconButton(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = "Start Empty Workout",
-                        iconImageVector = Icons.Default.Add
-                    )
+        when (selectedTab) {
+            is Tab.Workout -> {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .fillMaxWidth()
+                        .padding(contentPadding)
+                        .padding(horizontal = 16.dp, vertical = 16.dp)
+                ) {
+                    Row {
+                        HeavyTitleMedium(text = "Quick Start")
+                    }
                     Spacer(modifier = Modifier.height(8.dp))
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    HeavyTitleMedium(text = "Routines")
-                    HevyIconButton(iconDrawableId = R.drawable.new_folder)
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    HevySecondaryIconButton(
-                        modifier = Modifier.weight(1f),
-                        text = "New Routine",
-                        iconDrawableId = R.drawable.clipboard
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    HevySecondaryIconButton(
-                        modifier = Modifier.weight(1f),
-                        text = "Explore",
-                        iconImageVector = Icons.Default.Search
-                    )
-                }
-                folders.value.forEach { folder ->
+                    Row {
+                        HevySecondaryIconButton(
+                            modifier = Modifier.fillMaxWidth(),
+                            text = "Start Empty Workout",
+                            iconImageVector = Icons.Default.Add
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        HevyIconTitleButton(
-                            text = folder.title,
-                            iconImageVector = Icons.Default.ArrowDropDown
+                        HeavyTitleMedium(text = "Routines")
+                        HevyIconButton(iconDrawableId = R.drawable.new_folder)
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        HevySecondaryIconButton(
+                            modifier = Modifier.weight(1f),
+                            text = "New Routine",
+                            iconDrawableId = R.drawable.clipboard
                         )
-                        HevyIconButton(
-                            iconDrawableId = R.drawable.more_horizontal
+                        Spacer(modifier = Modifier.width(8.dp))
+                        HevySecondaryIconButton(
+                            modifier = Modifier.weight(1f),
+                            text = "Explore",
+                            iconImageVector = Icons.Default.Search
                         )
                     }
-                    if (folder.routines.isEmpty()) {
-                        Text(text = "there is no routine")
-                    }
-                    folder.routines.forEach { routine ->
-                        HevyRoutinesCard(
-                            title = routine.title,
-                            text = routine.content,
-                            label = "Start Routine"
-                        )
+                    folders.value.forEach { folder ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            HevyIconTitleButton(
+                                text = folder.title,
+                                iconImageVector = Icons.Default.ArrowDropDown
+                            )
+                            HevyIconButton(
+                                iconDrawableId = R.drawable.more_horizontal
+                            )
+                        }
+                        if (folder.routines.isEmpty()) {
+                            Text(text = "there is no routine")
+                        }
+                        folder.routines.forEach { routine ->
+                            HevyRoutinesCard(
+                                title = routine.title,
+                                text = routine.content,
+                                label = "Start Routine"
+                            )
+                        }
                     }
                 }
             }
-        } else if (selectedTab is Tab.Home) {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .fillMaxWidth()
-                    .padding(contentPadding)
-                    .padding(horizontal = 16.dp, vertical = 16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "No Home content available",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    textAlign = TextAlign.Center
-                )
+
+            is Tab.Home -> {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .fillMaxWidth()
+                        .padding(contentPadding)
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "No Home content available",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
-        } else if (selectedTab is Tab.Profile) {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .fillMaxWidth()
-                    .padding(contentPadding)
-                    .padding(horizontal = 16.dp, vertical = 16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "No Profile content available",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onSecondary,
-                    textAlign = TextAlign.Center
-                )
+
+            is Tab.Profile -> {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .fillMaxWidth()
+                        .padding(contentPadding)
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "No Profile content available",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSecondary,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
     }

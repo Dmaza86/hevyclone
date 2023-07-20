@@ -29,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -72,15 +73,13 @@ sealed class Tab {
 data class HevyNavItem(
     val icon: @Composable () -> Unit,
     val label: String,
-    val tab: Tab,
+    val tab: Tab
 )
 
 @Composable
 fun Workout() {
     var selectedTab: Tab by remember { mutableStateOf(Tab.Workout) }
-//    var tabs: List<Tab> by remember {
-//        mutableStateOf(listOf(Tab.Home, Tab.Workout, Tab.Profile))
-//    }
+
     var tabs: List<HevyNavItem> by remember {
         mutableStateOf(
             listOf(
@@ -183,12 +182,19 @@ fun Workout() {
                     )
                 })
         }, bottomBar = {
-            NavigationBar(containerColor = MaterialTheme.colorScheme.primary) {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.primary
+            ) {
                 tabs.forEach { tab ->
                     NavigationBarItem(
                         icon = tab.icon,
                         label = { Text(text = tab.label) },
                         selected = selectedTab == tab.tab,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedTextColor = MaterialTheme.colorScheme.secondary,
+                            selectedIconColor = MaterialTheme.colorScheme.secondary,
+                            indicatorColor = MaterialTheme.colorScheme.primary
+                        ),
                         onClick = { selectedTab = tab.tab }
                     )
                 }

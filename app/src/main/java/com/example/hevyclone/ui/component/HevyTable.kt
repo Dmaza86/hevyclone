@@ -46,7 +46,7 @@ fun RowScope.TableCell(
 }
 
 data class HevySet(
-    val setNumber: Number,
+    val setNumber: Int,
     val previous: String,
     val weight: Number,
     val reps: Int,

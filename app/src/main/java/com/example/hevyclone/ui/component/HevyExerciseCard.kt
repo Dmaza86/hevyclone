@@ -19,8 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,142 +37,94 @@ data class Exercise(
 )
 
 @Composable
-fun HevyExerciseCard() {
+fun HevyExerciseCard(exercise: Exercise) {
 
-    val exercises = remember {
-        mutableStateOf(
-            listOf(
-                Exercise(
-                    title = "Bench Press",
-                    notes = "",
-                    listOf(
-                        HevySet(
-                            setNumber = 1,
-                            previous = "5kgx10",
-                            weight = 5.4,
-                            reps = 8,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 2,
-                            previous = "53kgx20",
-                            weight = 78,
-                            reps = 6,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 3,
-                            previous = "105kgx3",
-                            weight = 154.6,
-                            reps = 14,
-                            done = true
-                        )
-                    )
-                ),
-                Exercise(
-                    title = "Incline Bench Press",
-                    notes = "Do your bench press",
-                    listOf(
-                        HevySet(
-                            setNumber = 1,
-                            previous = "",
-                            weight = 53,
-                            reps = 2,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 2,
-                            previous = "43kgx34",
-                            weight = 9.6,
-                            reps = 12,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 3,
-                            previous = "5kgx10",
-                            weight = 5,
-                            reps = 33,
-                            done = true
-                        )
-                    )
-                )
-            )
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.background
         )
-    }
-    exercises.value.forEach { exercise ->
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.background
-            )
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            )
-            {
-                TextButton(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Transparent,
-                        contentColor = MaterialTheme.colorScheme.secondary
-                    ),
-                    contentPadding = PaddingValues(0.dp)
-                ) {
-                    Icon(
-                        modifier = Modifier.size(28.dp),
-                        painter = painterResource(id = R.drawable.clipboard),
-                        contentDescription = null,
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = exercise.title,
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                }
-                HevyIconButton(iconImageVector = Icons.Default.MoreVert)
-            }
-            Row(modifier = Modifier.fillMaxWidth()) {
-                HevyBasicTextField(
-                    placeholder = "Add notes here...",
-                    initialValue = exercise.notes,
-                    style = MaterialTheme.typography.bodyLarge,
-                    align = TextAlign.Start,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        )
+        {
+            TextButton(
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Transparent,
+                    contentColor = MaterialTheme.colorScheme.secondary
+                ),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Icon(
+                    modifier = Modifier.size(28.dp),
+                    painter = painterResource(id = R.drawable.clipboard),
+                    contentDescription = null,
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = exercise.title,
+                    style = MaterialTheme.typography.titleLarge
                 )
             }
-            Row(modifier = Modifier.fillMaxWidth()) {
-                TextButton(
-                    onClick = {},
-                    contentPadding = PaddingValues(0.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Transparent,
-                        contentColor = MaterialTheme.colorScheme.secondary
-                    )
-                ) {
-                    Icon(
-                        painterResource(id = R.drawable.timer),
-                        contentDescription = null
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "Rest Timer: OFF",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
-            }
-            HevyTable(initialSets = exercise.sets)
+            HevyIconButton(iconImageVector = Icons.Default.MoreVert)
         }
+        Row(modifier = Modifier.fillMaxWidth()) {
+            HevyBasicTextField(
+                placeholder = "Add notes here...",
+                initialValue = exercise.notes,
+                style = MaterialTheme.typography.bodyLarge,
+                align = TextAlign.Start,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            )
+        }
+        Row(modifier = Modifier.fillMaxWidth()) {
+            TextButton(
+                onClick = {},
+                contentPadding = PaddingValues(0.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Transparent,
+                    contentColor = MaterialTheme.colorScheme.secondary
+                )
+            ) {
+                Icon(
+                    painterResource(id = R.drawable.timer),
+                    contentDescription = null
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Rest Timer: OFF",
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        }
+        HevyTable(initialSets = exercise.sets)
     }
 }
 
 @Preview
 @Composable
-fun HevyExerciseCardPreview(){
+fun HevyExerciseCardPreview() {
     HevyPreviewTheme {
-        HevyExerciseCard()
+        HevyExerciseCard(
+            Exercise(
+                title = "Bench Press",
+                notes = "",
+                sets = listOf(
+                    HevySet(
+                        setNumber = 1,
+                        previous = "5kgx10",
+                        weight = 5.4,
+                        reps = 8,
+                        done = true
+                    )
+                )
+            )
+        )
     }
 }

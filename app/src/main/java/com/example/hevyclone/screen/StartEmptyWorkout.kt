@@ -3,6 +3,8 @@
     ExperimentalMaterial3Api::class
 )
 
+package com.example.hevyclone.screen
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -32,7 +34,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,60 +64,37 @@ data class Exercise(
 @Composable
 fun StartEmptyWorkout() {
     val exercises = remember {
-        mutableStateOf(
-            listOf(
-                Exercise(
-                    title = "Bench Press",
-                    notes = "",
-                    listOf(
-                        HevySet(
-                            setNumber = 1,
-                            previous = "5kgx10",
-                            weight = 5.4,
-                            reps = 8,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 2,
-                            previous = "53kgx20",
-                            weight = 78,
-                            reps = 6,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 3,
-                            previous = "105kgx3",
-                            weight =154.6,
-                            reps = 14,
-                            done = true
-                        )
+        mutableStateListOf(
+            Exercise(
+                title = "Bench Press",
+                notes = "",
+                sets = listOf(
+                    HevySet(
+                        setNumber = 1,
+                        previous = "5kgx10",
+                        weight = 5.4,
+                        reps = 8,
+                        done = true
                     )
-                ),
-                Exercise(
-                    title = "Incline Bench Press",
-                    notes = "Do your bench press",
-                    listOf(
-                        HevySet(
-                            setNumber = 1,
-                            previous = "",
-                            weight = 53,
-                            reps = 2,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 2,
-                            previous = "43kgx34",
-                            weight = 9.6,
-                            reps = 12,
-                            done = true
-                        ),
-                        HevySet(
-                            setNumber = 3,
-                            previous = "5kgx10",
-                            weight = 5,
-                            reps = 33,
-                            done = true
-                        )
+                )
+            ),
+            Exercise(
+                title = "Incline Bench Press",
+                notes = "Do your bench press",
+                sets = listOf(
+                    HevySet(
+                        setNumber = 1,
+                        previous = "",
+                        weight = 53,
+                        reps = 2,
+                        done = true
+                    ),
+                    HevySet(
+                        setNumber = 2,
+                        previous = "5kgx10",
+                        weight = 5,
+                        reps = 33,
+                        done = true
                     )
                 )
             )
@@ -172,12 +151,12 @@ fun StartEmptyWorkout() {
                 Divider(color = MaterialTheme.colorScheme.onSurface, thickness = 1.dp)
             }
             item {
-                if (exercises.value.isEmpty()) {
+                if (exercises.isEmpty()) {
                     EmptyView()
                 }
             }
             item {
-                exercises.value.forEach { exercise ->
+                exercises.forEach { exercise ->
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -260,7 +239,24 @@ fun StartEmptyWorkout() {
                 ) {
                     HevyPrimaryButton(
                         label = "+ Add Exercise",
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = {
+                            exercises.add(
+                                Exercise(
+                                    title = "New Exercise",
+                                    notes = "",
+                                    listOf(
+                                        HevySet(
+                                            setNumber = 1,
+                                            previous = "",
+                                            weight = 0,
+                                            reps = 0,
+                                            done = true
+                                        )
+                                    )
+                                )
+                            )
+                        }
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -327,7 +323,7 @@ private fun EmptyView() {
 @Preview
 @Composable
 fun StartEmptyWorkoutPreview() {
-    HevyPreviewTheme() {
+    HevyPreviewTheme {
         StartEmptyWorkout()
     }
 }

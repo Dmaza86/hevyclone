@@ -1,6 +1,6 @@
 @file:OptIn(
     ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class
 )
 
 package com.example.hevyclone.screen
@@ -27,7 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,54 +36,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
-import com.example.hevyclone.ui.component.Exercise
+import com.example.hevyclone.model.getMockExercises
 import com.example.hevyclone.ui.component.HeavyTitleMedium
 import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyExerciseCard
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyPrimaryButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
-import com.example.hevyclone.ui.component.HevySet
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 
 @Composable
-fun StartEmptyWorkout() {
+fun Workout(
+    onNavigateToMain: () -> Unit,
+    onNavigateToAddExercise: () -> Unit
+) {
     val exercises = remember {
-        mutableStateListOf(
-            Exercise(
-                title = "Bench Press",
-                notes = "",
-                sets = listOf(
-                    HevySet(
-                        setNumber = 1,
-                        previous = "5kgx10",
-                        weight = 5.4,
-                        reps = 8,
-                        done = true
-                    )
-                )
-            ),
-            Exercise(
-                title = "Incline Bench Press",
-                notes = "Do your bench press",
-                sets = listOf(
-                    HevySet(
-                        setNumber = 1,
-                        previous = "",
-                        weight = 53,
-                        reps = 2,
-                        done = true
-                    ),
-                    HevySet(
-                        setNumber = 2,
-                        previous = "5kgx10",
-                        weight = 5,
-                        reps = 33,
-                        done = true
-                    )
-                )
-            )
+        mutableStateOf(
+            getMockExercises()
         )
     }
 
@@ -99,7 +69,8 @@ fun StartEmptyWorkout() {
             navigationIcon = {
                 HevyIconButton(
                     modifier = Modifier.size(350.dp),
-                    iconImageVector = Icons.Outlined.KeyboardArrowDown
+                    iconImageVector = Icons.Outlined.KeyboardArrowDown,
+                    onClick = onNavigateToMain
                 )
             },
             actions = {
@@ -137,12 +108,12 @@ fun StartEmptyWorkout() {
                 Divider(color = MaterialTheme.colorScheme.onSurface, thickness = 1.dp)
             }
             item {
-                if (exercises.isEmpty()) {
+                if (exercises.value.isEmpty()) {
                     EmptyView()
                 }
             }
             item {
-                exercises.forEach { exercise ->
+                exercises.value.forEach { exercise ->
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -161,23 +132,24 @@ fun StartEmptyWorkout() {
                     HevyPrimaryButton(
                         label = "+ Add Exercise",
                         modifier = Modifier.fillMaxWidth(),
-                        onClick = {
-                            exercises.add(
-                                Exercise(
-                                    title = "New Exercise",
-                                    notes = "",
-                                    listOf(
-                                        HevySet(
-                                            setNumber = 1,
-                                            previous = "",
-                                            weight = 0,
-                                            reps = 0,
-                                            done = true
-                                        )
-                                    )
-                                )
-                            )
-                        }
+                        onClick =
+                            onNavigateToAddExercise
+
+//                            exercises.value = exercises.value +
+//                                    Exercise(
+//                                        title = "New Exercise",
+//                                        notes = "",
+//                                        listOf(
+//                                            HevySet(
+//                                                setNumber = 1,
+//                                                previous = "",
+//                                                weight = 0,
+//                                                reps = 0,
+//                                                done = true
+//                                            )
+//                                        )
+//                                    )
+
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -243,8 +215,11 @@ private fun EmptyView() {
 
 @Preview
 @Composable
-fun StartEmptyWorkoutPreview() {
+fun WorkoutPreview() {
     HevyPreviewTheme {
-        StartEmptyWorkout()
+        Workout(
+            onNavigateToMain = {},
+            onNavigateToAddExercise = {}
+        )
     }
 }

@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.hevyclone.model.HevySet
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
@@ -48,14 +49,6 @@ fun RowScope.TableCell(
         content()
     }
 }
-
-data class HevySet(
-    val setNumber: Int,
-    val previous: String,
-    val weight: Number,
-    val reps: Int,
-    val done: Boolean
-)
 
 @Composable
 fun HevyTable(initialSets: List<HevySet>) {

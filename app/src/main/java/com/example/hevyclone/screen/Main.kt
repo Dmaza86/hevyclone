@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Home
@@ -51,7 +49,9 @@ data class HevyNavItem(
 )
 
 @Composable
-fun Main() {
+fun Main(
+    onNavigateToWorkout: ()->Unit
+) {
     var selectedTab: Tab by remember { mutableStateOf(Tab.Workout) }
 
     val folders = remember {
@@ -89,7 +89,7 @@ fun Main() {
         )
     }
 
-    var tabs: List<HevyNavItem> by remember {
+    val tabs: List<HevyNavItem> by remember {
         mutableStateOf(
             listOf(
                 HevyNavItem(
@@ -181,7 +181,7 @@ fun Main() {
                 .padding(horizontal = 16.dp, vertical = 16.dp)
         ) {
             when (selectedTab) {
-                is Tab.Workout -> workoutTab(folders.value)
+                is Tab.Workout -> workoutTab(folders.value, onNavigateToWorkout)
                 is Tab.Home -> homeTab()
                 is Tab.Profile -> profileTab()
             }
@@ -193,6 +193,6 @@ fun Main() {
 @Composable
 fun MainPreview() {
     HevyPreviewTheme {
-        Main()
+        Main(onNavigateToWorkout = {})
     }
 }

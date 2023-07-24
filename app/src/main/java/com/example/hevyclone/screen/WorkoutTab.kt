@@ -1,8 +1,3 @@
-@file:OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3Api::class
-)
-
 package com.example.hevyclone.screen
 
 import androidx.compose.foundation.layout.Arrangement
@@ -18,12 +13,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,7 +38,10 @@ data class Folder(
     val routines: List<Routine>
 )
 
-fun LazyListScope.workoutTab(folders: List<Folder>) {
+fun LazyListScope.workoutTab(
+    folders: List<Folder>,
+    onNavigateToWorkout: () -> Unit
+) {
 
 
     item {
@@ -58,7 +53,8 @@ fun LazyListScope.workoutTab(folders: List<Folder>) {
             HevySecondaryIconButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Start Empty Workout",
-                iconImageVector = Icons.Default.Add
+                iconImageVector = Icons.Default.Add,
+                onClick = onNavigateToWorkout
             )
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -152,7 +148,7 @@ fun WorkoutTabPreview() {
                             )
                         )
                     )
-                )
+                ), onNavigateToWorkout = {}
             )
         }
     }

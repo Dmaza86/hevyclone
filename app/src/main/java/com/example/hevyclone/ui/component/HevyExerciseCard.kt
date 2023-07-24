@@ -28,13 +28,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
+import com.example.hevyclone.model.Exercise
+import com.example.hevyclone.model.HevySet
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
-data class Exercise(
-    val title: String,
-    val notes: String,
-    val sets: List<HevySet>
-)
 
 @Composable
 fun HevyExerciseCard(exercise: Exercise) {

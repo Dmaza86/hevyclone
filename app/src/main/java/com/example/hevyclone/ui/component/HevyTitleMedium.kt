@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @Composable
-fun HeavyTitleMedium(
+fun HevyTitleMedium(
     modifier:Modifier = Modifier,
     text: String,
     fontWeight: FontWeight = FontWeight.Bold,
@@ -27,8 +27,8 @@ fun HeavyTitleMedium(
 
 @Preview
 @Composable
-fun HeavyTitleMediumPreview() {
+fun HevyTitleMediumPreview() {
     HevyPreviewTheme {
-        HeavyTitleMedium(text = "Routines")
+        HevyTitleMedium(text = "Routines")
     }
 }

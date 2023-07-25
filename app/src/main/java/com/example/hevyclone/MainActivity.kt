@@ -10,6 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.example.hevyclone.model.Exercise
+import com.example.hevyclone.model.getMockExercises
 import com.example.hevyclone.screen.AddExercise
 import com.example.hevyclone.screen.Main
 import com.example.hevyclone.screen.Workout
@@ -30,10 +32,15 @@ class MainActivity : ComponentActivity() {
                 val navigateToWorkout = { currentScreen = Screen.Workout }
                 val navigateToMain = { currentScreen = Screen.Main }
                 val navigateToAddExercise = { currentScreen = Screen.AddExercise }
+                var exercises: List<Exercise> by remember { mutableStateOf(getMockExercises()) }
+
+                fun addExercise(exercise: Exercise) {
+                    exercises = exercises + exercise
+                }
 
                 when (currentScreen) {
                     is Screen.Main -> Main(onNavigateToWorkout = navigateToWorkout)
-                    Screen.AddExercise -> AddExercise(onNavigateToMain = navigateToMain)
+                    Screen.AddExercise -> AddExercise(onNavigateToWorkout = navigateToWorkout, onAddExercise = ::addExercise)
                     Screen.Workout -> Workout(onNavigateToMain = navigateToMain, onNavigateToAddExercise = navigateToAddExercise)
                 }
             }

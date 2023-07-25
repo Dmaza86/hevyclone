@@ -51,7 +51,7 @@ fun HevyRoutinesCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                HeavyTitleMedium(
+                HevyTitleMedium(
                     modifier = Modifier.weight(1f),
                     text = title
                 )

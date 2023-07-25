@@ -36,21 +36,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
+import com.example.hevyclone.model.Exercise
 import com.example.hevyclone.model.getMockExercises
-import com.example.hevyclone.ui.component.HeavyTitleMedium
 import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyExerciseCard
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyPrimaryButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
+import com.example.hevyclone.ui.component.HevyTitleMedium
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 
+@ExperimentalMaterial3Api
 @Composable
 fun Workout(
     onNavigateToMain: () -> Unit,
-    onNavigateToAddExercise: () -> Unit
-) {
+    onNavigateToAddExercise: () -> Unit,
+)
+{
     val exercises = remember {
         mutableStateOf(
             getMockExercises()
@@ -134,22 +137,6 @@ fun Workout(
                         modifier = Modifier.fillMaxWidth(),
                         onClick =
                             onNavigateToAddExercise
-
-//                            exercises.value = exercises.value +
-//                                    Exercise(
-//                                        title = "New Exercise",
-//                                        notes = "",
-//                                        listOf(
-//                                            HevySet(
-//                                                setNumber = 1,
-//                                                previous = "",
-//                                                weight = 0,
-//                                                reps = 0,
-//                                                done = true
-//                                            )
-//                                        )
-//                                    )
-
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -196,7 +183,7 @@ private fun EmptyView() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            HeavyTitleMedium(text = "Get started")
+            HevyTitleMedium(text = "Get started")
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row(

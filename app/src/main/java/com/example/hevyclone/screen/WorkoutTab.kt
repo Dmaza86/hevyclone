@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
-import com.example.hevyclone.ui.component.HeavyTitleMedium
+import com.example.hevyclone.ui.component.HevyTitleMedium
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevyIconTitleButton
 import com.example.hevyclone.ui.component.HevyRoutinesCard
@@ -46,7 +46,7 @@ fun LazyListScope.workoutTab(
 
     item {
         Row {
-            HeavyTitleMedium(text = "Quick Start")
+            HevyTitleMedium(text = "Quick Start")
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row {
@@ -65,7 +65,7 @@ fun LazyListScope.workoutTab(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            HeavyTitleMedium(text = "Routines")
+            HevyTitleMedium(text = "Routines")
             HevyIconButton(iconDrawableId = R.drawable.new_folder)
         }
         Spacer(modifier = Modifier.height(8.dp))

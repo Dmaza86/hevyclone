@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -54,6 +55,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
 import com.example.hevyclone.model.Exercise
+import com.example.hevyclone.model.getMockExerciseDisplayed
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.component.HevySecondaryButton
 import com.example.hevyclone.ui.component.HevyTitleMedium
@@ -63,14 +65,12 @@ import com.example.hevyclone.ui.theme.HevyPreviewTheme
 @ExperimentalMaterial3Api
 @Composable
 
-fun AddExercise(onNavigateToWorkout: ()->Unit, onAddExercise:(Exercise)-> Unit) {
+fun AddExercise(
+    onNavigateToWorkout: () -> Unit,
+    onAddExercise: (Exercise) -> Unit,
+    exerciseList: List<Exercise>
+) {
     var text by remember { mutableStateOf("") }
-
-    val newExercise = Exercise(
-        title = "21s Bicep Curl",
-        notes = "Biceps",
-        sets = listOf()
-    )
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
@@ -163,7 +163,7 @@ fun AddExercise(onNavigateToWorkout: ()->Unit, onAddExercise:(Exercise)-> Unit) 
                 item {
                     HevyTitleMedium(text = "All Exercises")
                 }
-                item {
+                items(exerciseList) { exercise ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -180,7 +180,7 @@ fun AddExercise(onNavigateToWorkout: ()->Unit, onAddExercise:(Exercise)-> Unit) 
                             Box(modifier = Modifier.weight(1f)) {
                                 TextButton(
                                     onClick = {
-                                        onAddExercise(newExercise)
+                                        onAddExercise(exercise)
                                         onNavigateToWorkout()
                                     },
                                     modifier = Modifier
@@ -204,12 +204,12 @@ fun AddExercise(onNavigateToWorkout: ()->Unit, onAddExercise:(Exercise)-> Unit) 
                                         Spacer(modifier = Modifier.width(8.dp))
                                         Column {
                                             Text(
-                                                text = "21s Bicep Curl",
+                                                text = exercise.name,
                                                 maxLines = 1,
                                                 style = MaterialTheme.typography.titleLarge
                                             )
                                             Text(
-                                                text = "Biceps",
+                                                text = exercise.mainMuscle,
                                                 style = MaterialTheme.typography.titleLarge,
                                                 color = MaterialTheme.colorScheme.primary
                                             )
@@ -232,6 +232,10 @@ fun AddExercise(onNavigateToWorkout: ()->Unit, onAddExercise:(Exercise)-> Unit) 
 @Composable
 fun AddExercisePreview() {
     HevyPreviewTheme {
-        AddExercise(onNavigateToWorkout= {}, onAddExercise = {exercise ->  })
+        AddExercise(
+            onNavigateToWorkout = {},
+            onAddExercise = { exercise -> },
+            exerciseList = getMockExerciseDisplayed()
+        )
     }
 }

@@ -52,6 +52,7 @@ fun RowScope.TableCell(
 
 @Composable
 fun HevyTable(initialSets: List<HevySet>) {
+
     var sets by remember { mutableStateOf(initialSets) }
 
     Column {
@@ -146,13 +147,14 @@ fun HevyTable(initialSets: List<HevySet>) {
         HevySecondaryButton(
             text = "+ Add Set",
             modifier = Modifier.fillMaxWidth(),
-            onClick = {
+            onClick =
+            {
                 sets = sets + HevySet(
                     setNumber = sets.size + 1,
                     previous = "",
                     weight = 0,
                     reps = 0,
-                    done = true
+                    done = false
                 )
             }
         )

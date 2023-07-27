@@ -28,13 +28,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
-import com.example.hevyclone.model.Exercise
 import com.example.hevyclone.model.HevySet
+import com.example.hevyclone.model.OngoingExercise
+import com.example.hevyclone.model.getMockExerciseDisplayed
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 
 @Composable
-fun HevyExerciseCard(exercise: Exercise) {
+fun HevyExerciseCard(exercise: OngoingExercise) {
 
     Card(
         modifier = Modifier
@@ -65,7 +66,7 @@ fun HevyExerciseCard(exercise: Exercise) {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = exercise.title,
+                    text = exercise.exercise.name,
                     style = MaterialTheme.typography.titleLarge
                 )
             }
@@ -109,8 +110,8 @@ fun HevyExerciseCard(exercise: Exercise) {
 fun HevyExerciseCardPreview() {
     HevyPreviewTheme {
         HevyExerciseCard(
-            Exercise(
-                title = "Bench Press",
+            OngoingExercise(
+                exercise =  getMockExerciseDisplayed().find { it.name == "Front Squat" }!!,
                 notes = "",
                 sets = listOf(
                     HevySet(

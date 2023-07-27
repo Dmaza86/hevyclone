@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material3.Divider
@@ -27,8 +28,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,8 +35,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
-import com.example.hevyclone.model.Exercise
-import com.example.hevyclone.model.getMockExercises
+import com.example.hevyclone.model.HevySet
+import com.example.hevyclone.model.OngoingExercise
+import com.example.hevyclone.model.getMockExerciseDisplayed
 import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyExerciseCard
 import com.example.hevyclone.ui.component.HevyIconButton
@@ -52,14 +52,9 @@ import com.example.hevyclone.ui.theme.HevyPreviewTheme
 fun Workout(
     onNavigateToMain: () -> Unit,
     onNavigateToAddExercise: () -> Unit,
-)
-{
-    val exercises = remember {
-        mutableStateOf(
-            getMockExercises()
-        )
-    }
-
+    ongoingExercises: List<OngoingExercise>,
+//    onAddSet: (OngoingExercise) -> Unit
+) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
@@ -111,18 +106,15 @@ fun Workout(
                 Divider(color = MaterialTheme.colorScheme.onSurface, thickness = 1.dp)
             }
             item {
-                if (exercises.value.isEmpty()) {
+                if (ongoingExercises.isEmpty()) {
                     EmptyView()
                 }
             }
-            item {
-                exercises.value.forEach { exercise ->
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    HevyExerciseCard(exercise)
-                }
+            items(ongoingExercises) { exercise ->
+                Spacer(modifier = Modifier.height(16.dp))
+                HevyExerciseCard(exercise = exercise)
             }
+
             item {
                 Spacer(modifier = Modifier.height(24.dp))
                 Row(
@@ -136,7 +128,7 @@ fun Workout(
                         label = "+ Add Exercise",
                         modifier = Modifier.fillMaxWidth(),
                         onClick =
-                            onNavigateToAddExercise
+                        onNavigateToAddExercise
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -206,7 +198,42 @@ fun WorkoutPreview() {
     HevyPreviewTheme {
         Workout(
             onNavigateToMain = {},
-            onNavigateToAddExercise = {}
+            onNavigateToAddExercise = {},
+            ongoingExercises = listOf(
+                OngoingExercise(
+                    exercise = getMockExerciseDisplayed().find { it.name == "Front Squat" }!!,
+                    notes = "",
+                    sets = listOf(
+                        HevySet(
+                            setNumber = 1,
+                            previous = "5kgx10",
+                            weight = 5.4,
+                            reps = 8,
+                            done = true
+                        )
+                    )
+                ),
+                OngoingExercise(
+                    exercise = getMockExerciseDisplayed().find { it.name == "Plank" }!!,
+                    notes = "Do your bench press",
+                    sets = listOf(
+                        HevySet(
+                            setNumber = 1,
+                            previous = "",
+                            weight = 53,
+                            reps = 2,
+                            done = false
+                        ),
+                        HevySet(
+                            setNumber = 2,
+                            previous = "5kgx10",
+                            weight = 5,
+                            reps = 33,
+                            done = false
+                        )
+                    )
+                )
+            )
         )
     }
 }

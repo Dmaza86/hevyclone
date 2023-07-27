@@ -11,7 +11,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.example.hevyclone.model.Exercise
-import com.example.hevyclone.model.getMockExercises
+import com.example.hevyclone.model.HevySet
+import com.example.hevyclone.model.OngoingExercise
+import com.example.hevyclone.model.getMockExerciseDisplayed
+import com.example.hevyclone.model.getMockOngoingExercises
 import com.example.hevyclone.screen.AddExercise
 import com.example.hevyclone.screen.Main
 import com.example.hevyclone.screen.Workout
@@ -32,16 +35,45 @@ class MainActivity : ComponentActivity() {
                 val navigateToWorkout = { currentScreen = Screen.Workout }
                 val navigateToMain = { currentScreen = Screen.Main }
                 val navigateToAddExercise = { currentScreen = Screen.AddExercise }
-                var exercises: List<Exercise> by remember { mutableStateOf(getMockExercises()) }
-
-                fun addExercise(exercise: Exercise) {
-                    exercises = exercises + exercise
+                var ongoingExercises: List<OngoingExercise> by remember {
+                    mutableStateOf(
+                        getMockOngoingExercises()
+                    )
+                }
+                val exercises: List<Exercise> by remember {
+                    mutableStateOf(
+                        getMockExerciseDisplayed()
+                    )
                 }
 
                 when (currentScreen) {
                     is Screen.Main -> Main(onNavigateToWorkout = navigateToWorkout)
-                    Screen.AddExercise -> AddExercise(onNavigateToWorkout = navigateToWorkout, onAddExercise = ::addExercise)
-                    Screen.Workout -> Workout(onNavigateToMain = navigateToMain, onNavigateToAddExercise = navigateToAddExercise)
+                    is Screen.AddExercise -> AddExercise(
+                        onNavigateToWorkout = navigateToWorkout,
+                        onAddExercise = { newExercise ->
+                            ongoingExercises =
+                                ongoingExercises + OngoingExercise(
+                                    exercise = newExercise,
+                                    notes = "",
+                                    sets = listOf(
+                                        HevySet(
+                                            setNumber = 1,
+                                            previous = "-",
+                                            weight = 0,
+                                            reps = 0,
+                                            done = false
+                                        )
+                                    )
+                                )
+                        },
+                        exerciseList = exercises
+                    )
+
+                    is Screen.Workout -> Workout(
+                        onNavigateToMain = navigateToMain,
+                        onNavigateToAddExercise = navigateToAddExercise,
+                        ongoingExercises = ongoingExercises
+                    )
                 }
             }
         }

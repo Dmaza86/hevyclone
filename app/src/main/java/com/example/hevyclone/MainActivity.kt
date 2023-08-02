@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 
 package com.example.hevyclone
 
@@ -45,6 +45,18 @@ class MainActivity : ComponentActivity() {
                         getMockExerciseDisplayed()
                     )
                 }
+                val onAddSet = { selectedOngoingExercise: OngoingExercise ->
+                    val updatedExercise = selectedOngoingExercise.copy(
+                        sets = selectedOngoingExercise.sets + HevySet(
+                            setNumber = selectedOngoingExercise.sets.size + 1,
+                            previous = "-",
+                            weight = 0,
+                            reps = 0,
+                            done = false
+                        )
+                    )
+                    ongoingExercises = ongoingExercises.map { ongoingExercise-> if (ongoingExercise == selectedOngoingExercise) updatedExercise else ongoingExercise }
+                }
 
                 when (currentScreen) {
                     is Screen.Main -> Main(onNavigateToWorkout = navigateToWorkout)
@@ -72,7 +84,8 @@ class MainActivity : ComponentActivity() {
                     is Screen.Workout -> Workout(
                         onNavigateToMain = navigateToMain,
                         onNavigateToAddExercise = navigateToAddExercise,
-                        ongoingExercises = ongoingExercises
+                        ongoingExercises = ongoingExercises,
+                        onAddSet = onAddSet
                     )
                 }
             }

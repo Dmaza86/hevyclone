@@ -35,7 +35,7 @@ import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 
 @Composable
-fun HevyExerciseCard(exercise: OngoingExercise) {
+fun HevyExerciseCard(ongoingExercise: OngoingExercise, onAddSet: (OngoingExercise) -> Unit) {
 
     Card(
         modifier = Modifier
@@ -66,7 +66,7 @@ fun HevyExerciseCard(exercise: OngoingExercise) {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = exercise.exercise.name,
+                    text = ongoingExercise.exercise.name,
                     style = MaterialTheme.typography.titleLarge
                 )
             }
@@ -75,7 +75,7 @@ fun HevyExerciseCard(exercise: OngoingExercise) {
         Row(modifier = Modifier.fillMaxWidth()) {
             HevyBasicTextField(
                 placeholder = "Add notes here...",
-                initialValue = exercise.notes,
+                initialValue = ongoingExercise.notes,
                 style = MaterialTheme.typography.bodyLarge,
                 align = TextAlign.Start,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
@@ -101,7 +101,7 @@ fun HevyExerciseCard(exercise: OngoingExercise) {
                 )
             }
         }
-        HevyTable(initialSets = exercise.sets)
+        HevyTable(sets = ongoingExercise.sets, onAddSet = { onAddSet(ongoingExercise) })
     }
 }
 
@@ -110,8 +110,8 @@ fun HevyExerciseCard(exercise: OngoingExercise) {
 fun HevyExerciseCardPreview() {
     HevyPreviewTheme {
         HevyExerciseCard(
-            OngoingExercise(
-                exercise =  getMockExerciseDisplayed().find { it.name == "Front Squat" }!!,
+            ongoingExercise = OngoingExercise(
+                exercise = getMockExerciseDisplayed().find { it.name == "Front Squat" }!!,
                 notes = "",
                 sets = listOf(
                     HevySet(
@@ -122,7 +122,8 @@ fun HevyExerciseCardPreview() {
                         done = true
                     )
                 )
-            )
+            ),
+            onAddSet = {}
         )
     }
 }

@@ -53,7 +53,7 @@ fun Workout(
     onNavigateToMain: () -> Unit,
     onNavigateToAddExercise: () -> Unit,
     ongoingExercises: List<OngoingExercise>,
-//    onAddSet: (OngoingExercise) -> Unit
+    onAddSet: (OngoingExercise) -> Unit
 ) {
     Scaffold(topBar = {
         TopAppBar(title = {
@@ -112,7 +112,7 @@ fun Workout(
             }
             items(ongoingExercises) { exercise ->
                 Spacer(modifier = Modifier.height(16.dp))
-                HevyExerciseCard(exercise = exercise)
+                HevyExerciseCard(ongoingExercise = exercise, onAddSet = onAddSet)
             }
 
             item {
@@ -233,7 +233,8 @@ fun WorkoutPreview() {
                         )
                     )
                 )
-            )
+            ),
+            onAddSet = {}
         )
     }
 }

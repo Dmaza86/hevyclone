@@ -18,10 +18,6 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -51,9 +47,7 @@ fun RowScope.TableCell(
 }
 
 @Composable
-fun HevyTable(initialSets: List<HevySet>) {
-
-    var sets by remember { mutableStateOf(initialSets) }
+fun HevyTable(sets: List<HevySet>, onAddSet: () -> Unit) {
 
     Column {
         Row(
@@ -149,13 +143,7 @@ fun HevyTable(initialSets: List<HevySet>) {
             modifier = Modifier.fillMaxWidth(),
             onClick =
             {
-                sets = sets + HevySet(
-                    setNumber = sets.size + 1,
-                    previous = "",
-                    weight = 0,
-                    reps = 0,
-                    done = false
-                )
+                onAddSet()
             }
         )
     }
@@ -191,7 +179,7 @@ fun HevyHeaderButton(
 fun HevyTablePreview() {
     HevyPreviewTheme {
         HevyTable(
-            listOf(
+            sets = listOf(
                 HevySet(
                     setNumber = 1,
                     previous = "",
@@ -213,8 +201,8 @@ fun HevyTablePreview() {
                     reps = 13,
                     done = false
                 )
-            )
+            ),
+            onAddSet = {}
         )
-
     }
 }

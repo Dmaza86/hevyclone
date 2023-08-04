@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hevyclone.R
+import com.example.hevyclone.component.MainComponent
 import com.example.hevyclone.ui.component.HevyIconButton
 import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
@@ -48,10 +49,9 @@ data class HevyNavItem(
     val tab: Tab
 )
 
+@ExperimentalMaterial3Api
 @Composable
-fun Main(
-    onNavigateToWorkout: ()->Unit
-) {
+fun MainUi(component: MainComponent) {
     var selectedTab: Tab by remember { mutableStateOf(Tab.Workout) }
 
     val folders = remember {
@@ -181,7 +181,7 @@ fun Main(
                 .padding(horizontal = 16.dp, vertical = 16.dp)
         ) {
             when (selectedTab) {
-                is Tab.Workout -> workoutTab(folders.value, onNavigateToWorkout)
+                is Tab.Workout -> workoutTab(folders.value) { component.onWorkoutStarted() }
                 is Tab.Home -> homeTab()
                 is Tab.Profile -> profileTab()
             }
@@ -193,6 +193,8 @@ fun Main(
 @Composable
 fun MainPreview() {
     HevyPreviewTheme {
-        Main(onNavigateToWorkout = {})
+        MainUi(component = object : MainComponent{
+            override fun onWorkoutStarted() {}
+        })
     }
 }

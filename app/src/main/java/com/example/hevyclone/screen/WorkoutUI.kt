@@ -28,16 +28,21 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.value.MutableValue
+import com.arkivanov.decompose.value.Value
 import com.example.hevyclone.R
-import com.example.hevyclone.model.HevySet
+import com.example.hevyclone.component.WorkoutComponent
+import com.example.hevyclone.component.WorkoutComponent.Model
 import com.example.hevyclone.model.OngoingExercise
-import com.example.hevyclone.model.getMockExerciseDisplayed
+import com.example.hevyclone.model.getMockOngoingExercises
 import com.example.hevyclone.ui.component.HevyDoubleTextButton
 import com.example.hevyclone.ui.component.HevyExerciseCard
 import com.example.hevyclone.ui.component.HevyIconButton
@@ -49,12 +54,8 @@ import com.example.hevyclone.ui.theme.HevyPreviewTheme
 
 @ExperimentalMaterial3Api
 @Composable
-fun Workout(
-    onNavigateToMain: () -> Unit,
-    onNavigateToAddExercise: () -> Unit,
-    ongoingExercises: List<OngoingExercise>,
-    onAddSet: (OngoingExercise) -> Unit
-) {
+fun WorkoutUI(component: WorkoutComponent) {
+    val model by component.model.subscribeAsState()
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
@@ -68,7 +69,7 @@ fun Workout(
                 HevyIconButton(
                     modifier = Modifier.size(350.dp),
                     iconImageVector = Icons.Outlined.KeyboardArrowDown,
-                    onClick = onNavigateToMain
+                    onClick = component::onBackPressed
                 )
             },
             actions = {
@@ -106,13 +107,13 @@ fun Workout(
                 Divider(color = MaterialTheme.colorScheme.onSurface, thickness = 1.dp)
             }
             item {
-                if (ongoingExercises.isEmpty()) {
+                if (model.ongoingExercises.isEmpty()) {
                     EmptyView()
                 }
             }
-            items(ongoingExercises) { exercise ->
+            items(model.ongoingExercises) { exercise ->
                 Spacer(modifier = Modifier.height(16.dp))
-                HevyExerciseCard(ongoingExercise = exercise, onAddSet = onAddSet)
+                HevyExerciseCard(ongoingExercise = exercise, onAddSet = component::onAddSet)
             }
 
             item {
@@ -127,8 +128,7 @@ fun Workout(
                     HevyPrimaryButton(
                         label = "+ Add Exercise",
                         modifier = Modifier.fillMaxWidth(),
-                        onClick =
-                        onNavigateToAddExercise
+                        onClick = component::onAddExercise
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -192,49 +192,27 @@ private fun EmptyView() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun WorkoutPreview() {
     HevyPreviewTheme {
-        Workout(
-            onNavigateToMain = {},
-            onNavigateToAddExercise = {},
-            ongoingExercises = listOf(
-                OngoingExercise(
-                    exercise = getMockExerciseDisplayed().find { it.name == "Front Squat" }!!,
-                    notes = "",
-                    sets = listOf(
-                        HevySet(
-                            setNumber = 1,
-                            previous = "5kgx10",
-                            weight = 5.4,
-                            reps = 8,
-                            done = true
-                        )
-                    )
-                ),
-                OngoingExercise(
-                    exercise = getMockExerciseDisplayed().find { it.name == "Plank" }!!,
-                    notes = "Do your bench press",
-                    sets = listOf(
-                        HevySet(
-                            setNumber = 1,
-                            previous = "",
-                            weight = 53,
-                            reps = 2,
-                            done = false
-                        ),
-                        HevySet(
-                            setNumber = 2,
-                            previous = "5kgx10",
-                            weight = 5,
-                            reps = 33,
-                            done = false
-                        )
-                    )
-                )
-            ),
-            onAddSet = {}
+        WorkoutUI(
+            component = object : WorkoutComponent {
+                override val model: Value<Model> = MutableValue(Model(getMockOngoingExercises()))
+
+                override fun onBackPressed() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAddExercise() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onAddSet(ongoingExercise: OngoingExercise) {
+                    TODO("Not yet implemented")
+                }
+            }
         )
     }
 }

@@ -9,7 +9,8 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.example.hevyclone.component.RootComponent.Child
-import kotlinx.android.parcel.Parcelize
+import com.example.hevyclone.model.Exercise
+import kotlinx.parcelize.Parcelize
 
 interface RootComponent {
     val stack: Value<ChildStack<*, Child>>
@@ -39,26 +40,38 @@ class DefaultRootComponent(
             is Config.AddExercise -> Child.AddExercise(createAddExerciseComponent(componentContext))
             is Config.Main -> Child.Main(createMainComponent(componentContext))
             is Config.Workout -> Child.Workout(createWorkoutComponent(componentContext))
+            is Config.WorkoutWithNewExercise -> Child.Workout(createWorkoutComponent(componentContext))
         }
 
     private fun createAddExerciseComponent(componentContext: ComponentContext): AddExerciseComponent =
-        DefaultAddExerciseComponent(componentContext = componentContext)
+        DefaultAddExerciseComponent(
+            componentContext = componentContext,
+            onOutput = ::onAddExerciseOutput
+        )
+
+    private fun onAddExerciseOutput(output: AddExerciseComponent.Output) {
+        when (output) {
+            is AddExerciseComponent.Output.BackPressed -> navigation.pop()
+            is AddExerciseComponent.Output.ExerciseAdded -> navigation.pop()
+        }
+    }
 
     private fun createMainComponent(componentContext: ComponentContext): MainComponent =
-        DefaultMainComponent(componentContext = componentContext, onOutput= :: onMainOutput)
+        DefaultMainComponent(componentContext = componentContext, onOutput = ::onMainOutput)
 
-    private fun onMainOutput(output: MainComponent.Output){
-        when (output){
+    private fun onMainOutput(output: MainComponent.Output) {
+        when (output) {
             MainComponent.Output.WorkoutStarted -> navigation.push(Config.Workout)
         }
     }
 
     private fun createWorkoutComponent(componentContext: ComponentContext): WorkoutComponent =
-        DefaultWorkoutComponent(componentContext = componentContext, onOutput = :: onWorkoutOutput)
+        DefaultWorkoutComponent(componentContext = componentContext, onOutput = ::onWorkoutOutput)
 
-    private fun onWorkoutOutput(output: WorkoutComponent.Output){
-        when (output){
+    private fun onWorkoutOutput(output: WorkoutComponent.Output) {
+        when (output) {
             WorkoutComponent.Output.BackPressed -> navigation.pop()
+            WorkoutComponent.Output.AddExercisePressed -> navigation.push(Config.AddExercise)
         }
     }
 
@@ -72,5 +85,8 @@ class DefaultRootComponent(
 
         @Parcelize
         object AddExercise : Config
+
+        @Parcelize
+        data class WorkoutWithNewExercise(val exercise: Exercise) : Config
     }
 }

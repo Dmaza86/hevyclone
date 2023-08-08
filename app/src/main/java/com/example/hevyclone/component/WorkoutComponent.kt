@@ -21,7 +21,7 @@ interface WorkoutComponent {
 
     sealed interface Output {
         object BackPressed : Output
-
+        object AddExercisePressed : Output
     }
 }
 
@@ -32,14 +32,14 @@ class DefaultWorkoutComponent(
     ComponentContext by componentContext {
 
     override val model: Value<Model> =
-        MutableValue(WorkoutComponent.Model(getMockOngoingExercises()))
+        MutableValue(Model(getMockOngoingExercises()))
 
     override fun onBackPressed() {
         onOutput(Output.BackPressed)
     }
 
     override fun onAddExercise() {
-        TODO("Not yet implemented")
+        onOutput(Output.AddExercisePressed)
     }
 
     override fun onAddSet(ongoingExercise: OngoingExercise) {

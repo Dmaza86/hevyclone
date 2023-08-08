@@ -13,7 +13,7 @@ fun RootUI(component: RootComponent){
         stack = component.stack
     ) {
         when (val child = it.instance) {
-            is Child.AddExercise -> TODO()
+            is Child.AddExercise -> AddExerciseUI(child.component)
             is Child.Main -> MainUI(child.component)
             is Child.Workout -> WorkoutUI(child.component)
         }

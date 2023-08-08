@@ -53,7 +53,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.value.MutableValue
+import com.arkivanov.decompose.value.Value
 import com.example.hevyclone.R
+import com.example.hevyclone.component.AddExerciseComponent
 import com.example.hevyclone.model.Exercise
 import com.example.hevyclone.model.getMockExerciseDisplayed
 import com.example.hevyclone.ui.component.HevyIconButton
@@ -65,11 +69,8 @@ import com.example.hevyclone.ui.theme.HevyPreviewTheme
 @ExperimentalMaterial3Api
 @Composable
 
-fun AddExercise(
-    onNavigateToWorkout: () -> Unit,
-    onAddExercise: (Exercise) -> Unit,
-    exerciseList: List<Exercise>
-) {
+fun AddExerciseUI(component: AddExerciseComponent) {
+    val model by component.model.subscribeAsState()
     var text by remember { mutableStateOf("") }
 
     Scaffold(topBar = {
@@ -83,7 +84,7 @@ fun AddExercise(
             },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.DarkGray),
             navigationIcon = {
-                TextButton(onClick = onNavigateToWorkout) {
+                TextButton(onClick = component::onBackPressed) {
                     Text(
                         text = "Cancel",
                         style = MaterialTheme.typography.titleLarge.copy(MaterialTheme.colorScheme.secondary)
@@ -112,7 +113,7 @@ fun AddExercise(
                 TextField(
                     value = text,
                     onValueChange = { text = it },
-                    placeholder = { "Search Exercises" },
+                    placeholder = { Text("Search Exercises") },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Outlined.Search,
@@ -163,7 +164,7 @@ fun AddExercise(
                 item {
                     HevyTitleMedium(text = "All Exercises")
                 }
-                items(exerciseList) { exercise ->
+                items(model.exerciseList) { exercise ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -180,8 +181,7 @@ fun AddExercise(
                             Box(modifier = Modifier.weight(1f)) {
                                 TextButton(
                                     onClick = {
-                                        onAddExercise(exercise)
-                                        onNavigateToWorkout()
+                                        component.onAddExercise(exercise)
                                     },
                                     modifier = Modifier
                                         .fillMaxWidth(),
@@ -227,15 +227,22 @@ fun AddExercise(
     }
 }
 
-
 @Preview
 @Composable
 fun AddExercisePreview() {
     HevyPreviewTheme {
-        AddExercise(
-            onNavigateToWorkout = {},
-            onAddExercise = { exercise -> },
-            exerciseList = getMockExerciseDisplayed()
-        )
+        AddExerciseUI(component = object : AddExerciseComponent {
+            override val model: Value<AddExerciseComponent.Model> = MutableValue(
+                AddExerciseComponent.Model(
+                    getMockExerciseDisplayed()
+                )
+            )
+            override fun onBackPressed() {
+                TODO("Not yet implemented")
+            }
+            override fun onAddExercise(exercise: Exercise) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }
